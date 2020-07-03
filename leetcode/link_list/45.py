@@ -69,6 +69,14 @@ class Solution2:
         cur_node.next = pre_node
         return self.reserved_link_list(next_, cur_node)
 
+    @staticmethod
+    def reserved_link_list1(cur_node, pre_node) -> ListNode:
+        while cur_node is not None:
+            next_ = cur_node.next
+            cur_node.next = pre_node
+            cur_node = next_
+            pre_node = cur_node
+
 
 # h = generate_link_list([0, 1, 2, 3, 4])
 # s = Solution()
