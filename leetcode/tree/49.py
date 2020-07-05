@@ -4,49 +4,59 @@
 from tree import generate_tree, TreeNode
 
 
-# 迭代
+# 递归
 class Solution:
     def __init__(self):
-        self.tree_value = []
-        self.temp = []
         self.is_symmetric = True
 
     def isSymmetric(self, root: TreeNode) -> bool:
         if root:
-            self.temp.append(root)
-            self.level_traversal()
-            return self.is_symmetric
+            self.is_mirror(root.left, root.right)
+        return self.is_symmetric
 
-    # 层次遍历
-    def level_traversal(self):
-        # 节点数量 用于判断该层是否遍历完成
-        count = 0
-        layer = 0
-        while self.temp:
-            node = self.temp.pop(0)
-            if node.left:
-                self.temp.append(node.left)
-                self.tree_value.append(node.left.val)
-            if node.right:
-                self.temp.append(node.right)
-                self.tree_value.append(node.right.val)
-            count += 1
-            if (2 ** layer) == count:
-                if not self.array_is_symmetrical(self.tree_value):
-                    self.is_symmetric = False
-                    return
-                layer += 1
-                count = 0
-                self.tree_value.clear()
+    def is_mirror(self, left_node, right_node):
+        if left_node is None and right_node is None:
+            return
+        if left_node and right_node and left_node.val == right_node.val:
+            self.is_mirror(left_node.left, right_node.right)
+            self.is_mirror(left_node.right, right_node.left)
+        else:
+            self.is_symmetric = False
+            return
+
+
+# 迭代
+class Solution2:
+    def __init__(self):
+        self.is_symmetric = True
+
+    def isSymmetric(self, root: TreeNode) -> bool:
+        if root:
+            return self.is_mirror(root)
+        return True
 
     @staticmethod
-    def array_is_symmetrical(array):
-        for i in range(len(array) // 2):
-            if array[i] != array[-(i + 1)]:
+    def is_mirror(root) -> bool:
+        tree_array = [root.right, root.left]
+        while tree_array:
+            left = tree_array.pop(0)
+            if not tree_array:
                 return False
+            right = tree_array.pop(0)
+
+            if not left and not right:
+                continue
+            if left is None or right is None:
+                return False
+            if left.val != right.val:
+                return False
+            tree_array.append(left.left)
+            tree_array.append(right.right)
+            tree_array.append(left.right)
+            tree_array.append(right.left)
         return True
 
 
-tree = generate_tree([1, 2, 2, 3, 4, 4, 3])
-s = Solution()
+tree = generate_tree([1, 2, 2, None, 3, None, 3])
+s = Solution2()
 print(s.isSymmetric(tree))
