@@ -34,8 +34,15 @@ class Solution:
 
 class Solution2:
     def maxProfit(self, prices: List[int]) -> int:
-        pass
+        max_profit = 0
+        min_profit = float('inf')
+        for item in prices:
+            if item < min_profit:
+                min_profit = item
+            elif item - min_profit > max_profit:
+                max_profit = item - min_profit
+        return max_profit
 
 
-s = Solution()
-print(s.maxProfit([2]))
+s = Solution2()
+print(s.maxProfit([7, 1, 5, 3, 6, 4]))
