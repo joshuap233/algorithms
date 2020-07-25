@@ -19,10 +19,9 @@ class Solution:
         self.calculate_stairs(number - 2)
 
 
-# 改进
+# 改进 32 ms
 class Solution2:
-    def __init__(self):
-        self.memo = {}
+    memo = {}
 
     def climbStairs(self, n: int) -> int:
         return self.calculate_stairs(n, 0)

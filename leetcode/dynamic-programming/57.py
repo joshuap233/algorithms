@@ -29,7 +29,7 @@ class Solution:
         self.rob_index(index + 3, total)
 
 
-# 加个memo
+# 加个memo 48ms
 class Solution2:
     def __init__(self):
         self.nums = []
@@ -52,8 +52,3 @@ class Solution2:
         total += self.nums[index]
         self.rob_index(index + 2, total)
         self.rob_index(index + 3, total)
-
-
-class Solution3:
-    def rob(self, nums: List[int]) -> int:
-        pass
