@@ -32,7 +32,7 @@ class Solution:
         return True
 
 
-class Solution:
+class Solution1:
     """
         解法2, 递归过程中判断
         使用 prev 存储中序遍历上一个节点
@@ -41,7 +41,6 @@ class Solution:
         节点的左子树只包含小于当前节点的数。
         节点的右子树只包含大于当前节点的数。
         所有左子树和右子树自身必须也是二叉搜索树。
-
     """
 
     def isValidBST(self, root: TreeNode) -> bool:

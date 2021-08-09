@@ -22,8 +22,17 @@ class Solution:
 
 
 class Solution1:
+    """
+        直接把公式抄过来的了....
+        dp[i]=(dp[i−1]+m)%i
+    """
+
     def lastRemaining(self, n: int, m: int) -> int:
-        pass
+        c = 0
+        for i in range(2, n + 1):
+            c = (m + c) % i
+        return c
+
 
 s = Solution1()
 s.lastRemaining(5, 3)

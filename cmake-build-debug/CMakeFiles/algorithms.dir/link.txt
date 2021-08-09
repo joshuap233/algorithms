@@ -1,1 +1,0 @@
-/bin/gcc -g CMakeFiles/algorithms.dir/leetcode/220.c.o -o algorithms 

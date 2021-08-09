@@ -1,3 +1,0 @@
-/home/pjs/PycharmProjects/algorithms/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/pjs/PycharmProjects/algorithms/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/pjs/PycharmProjects/algorithms/cmake-build-debug/CMakeFiles/algorithms.dir
