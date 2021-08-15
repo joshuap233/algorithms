@@ -65,24 +65,28 @@ class Solution1:
         res = []
         nums.sort()
 
-        for a in range(len(nums)):
-            # 去重
-            if a > 0 and nums[a] == nums[a - 1]:
+        for a, v in enumerate(nums):
+            if v > 0:
+                break
+
+            if a > 0 and v == nums[a - 1]:
                 continue
 
-            ll, r = a + 1, len(nums) - 1
-            while ll < r:
-                # 去重
-                if ll != a + 1 and nums[ll] == nums[ll - 1]:
-                    ll += 1
-                    continue
-
-                target = -(nums[ll] + nums[a])
-                while ll < r and nums[r] > target:
-                    r -= 1
-                if ll < r and nums[r] == target:
-                    res.append([nums[a], nums[ll], nums[r]])
-                ll += 1
+            b, c = a + 1, len(nums) - 1
+            while b < c:
+                Sum = nums[b] + nums[c] + v
+                if Sum == 0:
+                    res.append([v, nums[b], nums[c]])
+                    b += 1
+                    c -= 1
+                    while b < c and nums[b] == nums[b - 1]:
+                        b += 1
+                    while b < c and nums[c] == nums[c + 1]:
+                        c -= 1
+                elif Sum < 0:
+                    b += 1
+                else:
+                    c -= 1
         return res
 
 

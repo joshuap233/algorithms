@@ -18,7 +18,7 @@ class Solution:
             maxi = max(maxi, cnt)
 
         这种写法的问题在于:
-        第一遍遍历获得的子序列为
+        [0,1,0,3,2,3] 第一遍遍历获得的子序列为
         0,1,3,
         而不是 0,1,2,3
 
@@ -45,10 +45,6 @@ class Solution:
             dp[i] = cnt
         return max(dp)
 
-
-class Solution1:
-    def lengthOfLIS(self, nums: List[int]) -> int:
-        pass
 
 
 s = Solution()

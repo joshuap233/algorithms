@@ -25,5 +25,11 @@ class Solution:
         return max(dp[-1])
 
 
+class Solution1:
+
+    def maxProfit(self, prices: List[int]) -> int:
+        pass
+
+
 s = Solution()
 s.maxProfit([1, 2, 3, 0, 2])

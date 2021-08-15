@@ -32,7 +32,7 @@ class Solution:
         第一种情况, 未交换前, num[left] 必然为 1,否则就是第二种情况,
         也就是说, i ~ left 必然全为 1 ,因此 i+1
 
-        第二种情况, 未交换前, num[left] 可能为 0 或 1
+        第二种情况, 未交换前, num[right] 可能为 0 或 1
         如果为 0 , 那么交换后可能出现这种顺序:
         0,0,0,1,1 [0],xxx
         因此 i 指针能移动
@@ -42,7 +42,7 @@ class Solution:
     def sortColors(self, nums: List[int]) -> None:
         left, right = 0, len(nums) - 1
         i = 0
-        while i < len(nums) and i <= right:
+        while i <= right:
             if nums[i] == 0:
                 nums[left], nums[i] = nums[i], nums[left]
                 i += 1

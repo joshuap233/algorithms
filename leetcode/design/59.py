@@ -23,20 +23,3 @@ class MinStack:
     def getMin(self) -> int:
         return self.min
 
-
-array1 = ["MinStack", "push", "push", "push", "getMin", "top", "pop", "getMin"]
-array2 = [[], [-2], [0], [-1], [], [], [], []]
-obj = MinStack()
-for a1, a2 in zip(array1, array2):
-    if a1 == 'MinStack':
-        print('null')
-    elif a1 == 'getMin':
-        value = obj.getMin()
-        print(value if value != float('inf') else 'null')
-    elif a1 == 'push':
-        obj.push(a2[0])
-        print('null')
-    elif a1 == 'pop':
-        print(obj.pop())
-    else:
-        print(obj.top())

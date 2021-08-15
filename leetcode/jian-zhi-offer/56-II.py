@@ -33,8 +33,22 @@ class Solution2:
      对 3 求余
          0b0101
     """
-    pass
+
+    def singleNumber(self, nums: List[int]) -> int:
+        res = [0] * 32
+        for i in nums:
+            j = 0
+            while i:
+                if i & 1:
+                    res[j] += 1
+                j += 1
+                i >>= 1
+        ret = 0
+        for i in reversed(res):
+            ret <<= 1
+            ret |= i % 3
+        return ret
 
 
-s = Solution()
-s.singleNumber([3, 2, 3])
+s = Solution2()
+s.singleNumber([3, 4, 3, 3])

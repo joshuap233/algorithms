@@ -17,5 +17,22 @@ class Solution:
         return numbers[0]
 
 
+class Solution1:
+    """二分"""
+
+    def minArray(self, numbers: List[int]) -> int:
+        left, right = 0, len(numbers) - 1
+
+        while left < right:
+            mid = (left + right) // 2
+            if numbers[mid] < numbers[right]:
+                right = mid
+            elif numbers[mid] > numbers[right]:
+                left = mid + 1
+            else:
+                return min(numbers[left:right])
+        return numbers[left]
+
+
 s = Solution()
 print(s.minArray([2, 2, 2, 0, 1]))

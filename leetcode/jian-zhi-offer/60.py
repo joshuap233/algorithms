@@ -96,5 +96,6 @@ class Solution3:
         return last
 
 
+
 s = Solution2()
 s.dicesProbability(2)

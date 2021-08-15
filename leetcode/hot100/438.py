@@ -34,3 +34,6 @@ class Solution:
                 del window[s[left]]
         return res
 
+
+s = Solution1()
+s.findAnagrams("cbaebabacd", "abc")

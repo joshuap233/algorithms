@@ -39,6 +39,7 @@ class Solution1:
         m = 1
         while m & res == 0:
             m <<= 1
+
         x, y = 0, 0
         for i in nums:
             if i & m:

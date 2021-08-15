@@ -15,9 +15,7 @@ class Solution:
     """
 
     def longestConsecutive(self, nums: List[int]) -> int:
-        Dict = {}
-        for i in nums:
-            Dict[i] = False
+        Dict = {i: False for i in nums}
 
         maxi = 0
         for i in nums:
@@ -58,5 +56,5 @@ class Solution:
         return maxi
 
 
-s = Solution()
-s.longestConsecutive([100, 4, 200, 1, 3, 2])
+s = Solution2()
+s.longestConsecutive([1, 2, 3, 4, 5, 6, 7, 8])

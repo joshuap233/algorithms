@@ -1,5 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
 test.py
 cmake-build-debug
-
+.ts
+分类/
 __pycache__/

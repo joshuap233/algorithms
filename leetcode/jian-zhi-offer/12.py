@@ -27,8 +27,3 @@ class Solution:
                 if board[i][j] == word[0] and dfs(j, i, 0):
                     return True
         return False
-
-
-s = Solution()
-res = s.exist([["C", "A", "A"], ["A", "A", "A"], ["B", "C", "D"]], "AAB")
-print(res)

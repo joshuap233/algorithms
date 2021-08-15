@@ -19,9 +19,28 @@ class Solution:
         return list(res)
 
 
+class Solution1:
+    def permutation(self, s: str) -> List[str]:
+        res = set()
+        s = list(s)
+
+        def backtrace(left: int):
+            if left == len(s):
+                res.add(''.join(s))
+
+            for i in range(left, len(s)):
+                s[left], s[i] = s[i], s[left]
+                backtrace(left + 1)
+                s[left], s[i] = s[i], s[left]
+
+        backtrace(0)
+
+        return list(res)
+
+
 # 即获取下一个字典序排列
 # 类似: https://leetcode-cn.com/problems/next-permutation/solution/xia-yi-ge-pai-lie-by-leetcode-solution/
-class Solution1:
+class Solution2:
     """
         重复寻找下一个字典序, 很明显需要找到一个尽量靠右的数 s[j](变化的尽量是低位)
         与 s[j] 恰好比当前的数大的数交换,交换后序列为  s[x] .... s[j] .... (交换前为: s[j] ... s[x]....)

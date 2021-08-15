@@ -12,11 +12,6 @@ class Solution:
             首先计算容积,如果大于 max 则将 max 置为当前容积
             接着比较 height[left] 与 height[right]
             高较小的那个指针移动,
-
-            原理是,移动 left ,找到比 height[left] 更大的那个,
-            或者移动右指针, 找到比 height[right] 更大的那个,
-            那么怎么决定移动左指针还是右指针? 移动 height[left] 与
-            height[right] 中小的那个
     """
     def maxArea(self, height: List[int]) -> int:
         left, right = 0, len(height) - 1

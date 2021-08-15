@@ -25,14 +25,13 @@ class Solution:
 class Solution:
     def findContinuousSequence(self, target: int) -> List[List[int]]:
         res = []
-        value = 0
-        left, right = 1, 0
-        for i in range(1, target):
-            value += i
-            right += 1
-            while value > target:
-                value -= left
+        Sum = 0
+        left = 1
+        for right in range(left, target):
+            Sum += right
+            while Sum > target:
+                Sum -= left
                 left += 1
-            if value == target:
+            if Sum == target:
                 res.append(list(range(left, right + 1)))
         return res

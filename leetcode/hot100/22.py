@@ -42,20 +42,22 @@ class Solution1:
     def generateParenthesis(self, n: int) -> List[str]:
         res = []
 
-        def backtrack(s: list, left: int, right: int):
-            if len(s) == 2 * n:
-                res.append(''.join(s))
+        def backtrack(left: int, right: int):
+            if len(cur) == 2 * n:
+                res.append(''.join(cur))
 
             if left > 0:
-                s.append('(')
-                backtrack(s, left - 1, right)
-                s.pop(-1)
-            if left < right:
-                s.append(')')
-                backtrack(s, left, right - 1)
-                s.pop(-1)
+                cur.append('(')
+                backtrack(left - 1, right)
+                cur.pop(-1)
 
-        backtrack([], n, n)
+            if left < right:
+                cur.append(')')
+                backtrack(left, right - 1)
+                cur.pop(-1)
+
+        cur = []
+        backtrack(n, n)
         return res
 
 

@@ -21,18 +21,15 @@ class Solution:
         return True
 
 
-class Solution:
+class Solution1:
+    """上面代码优化"""
+
     def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
         stack = []
-        for e in popped:
-            if stack and e == stack[-1]:
-                stack.pop(-1)
-            else:
-                for i, v in enumerate(pushed):
-                    if v == e:
-                        stack.extend(pushed[:i])
-                        pushed = pushed[i + 1:]
-                        break
-                else:
-                    return False
-        return True
+        i = 0
+        for e in pushed:
+            stack.append(e)
+            while stack and stack[-1] == popped[i]:
+                stack.pop()
+                i += 1
+        return not stack

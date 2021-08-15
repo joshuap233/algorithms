@@ -3,8 +3,6 @@
 from collections import deque
 
 
-# deque 比 list 快
-# 至于 Queue, 这个是线程安全结构, 比 list 还慢
 class MaxQueue:
     """
     考虑构建一个递减列表来保存队列 所有递减的元素 ，

@@ -49,11 +49,11 @@ class Solution:
             if not string:
                 return True
 
-            res = False
             for i in range(1, len(string) + 1):
                 if string[:i] in wordDict:
-                    res = res or recur(string[i:])
-            return res
+                    if recur(string[i:]):
+                        return True
+            return False
 
         return recur(s)
 

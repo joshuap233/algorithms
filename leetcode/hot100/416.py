@@ -3,6 +3,7 @@
 # 01背包问题
 
 from typing import List
+from functools import lru_cache
 
 
 class Solution:
@@ -37,4 +38,21 @@ class Solution:
 
 class Solution1:
     def canPartition(self, nums: List[int]) -> bool:
-        target = sum(nums) / 2
+        Sum = sum(nums)
+        if Sum % 2 != 0:
+            return False
+
+        target = Sum // 2
+
+        def backtrace(left: int, res: int) -> bool:
+            if res == target:
+                return True
+            if res > target:
+                return False
+
+            for i in range(left, len(nums)):
+                if backtrace(i + 1, res + nums[i]):
+                    return True
+            return False
+
+        return backtrace(0, 0)

@@ -46,6 +46,7 @@ class Solution1:
 
 # 优化上面的代码
 class Solution2:
+    """动态规划"""
     def maxValue(self, grid: List[List[int]]) -> int:
         for i, v in enumerate(grid[0]):
             for j, v1 in enumerate(grid):
@@ -58,7 +59,6 @@ class Solution2:
                 else:
                     grid[j][i] += max(grid[j][i - 1], grid[j - 1][i])
         return grid[-1][-1]
-
 
 s = Solution1()
 print(s.maxValue([[1, 3, 1], [1, 5, 1], [4, 2, 1]]))

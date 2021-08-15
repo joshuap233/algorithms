@@ -24,7 +24,7 @@ class Solution:
         return True
 
 
-class Solution:
+class Solution1:
     """
        O(n) 时间复杂度和 O(1) 空间复杂度,
        没说不能修改链表?? 算法结束改回来就行....
@@ -34,4 +34,19 @@ class Solution:
     """
 
     def isPalindrome(self, head: ListNode) -> bool:
-        pass
+        slow, fast = head, head
+        pre = None
+        while fast and fast.next:
+            fast = fast.next.next
+
+            Next = slow.next
+            slow.next = pre
+            pre = slow
+            slow = Next
+
+        while pre and slow:
+            if pre.val != slow.val:
+                return False
+            pre = pre.next
+            slow = slow.next
+        return True

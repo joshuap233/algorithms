@@ -44,5 +44,26 @@ class Solution1:
         return res
 
 
+class Solution2:
+    """
+        上面的代码优化
+    """
+
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        res = []
+
+        def backtrace(left: int) -> None:
+            res.append(num[:])
+
+            for i in range(left, len(nums)):
+                num.append(nums[i])
+                backtrace(i + 1)
+                num.pop()
+
+        num = []
+        backtrace(0)
+        return res
+
+
 s = Solution1()
 print(s.subsets([1, 2, 3]))
