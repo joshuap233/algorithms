@@ -4,3 +4,4 @@ cmake-build-debug
 .ts
 leetcode/分类/
 __pycache__/
+.idea

@@ -26,30 +26,3 @@ class Solution:
             return new
 
         return sort(0, len(nums) - 1)
-
-
-class Solution1:
-    def sortArray(self, n: List[int]) -> List[int]:
-        def split(left: int, right: int) -> int:
-            pivot = n[left]
-            ll, rr = left, right
-
-            while ll < rr:
-                while ll < rr and n[rr] >= pivot:
-                    rr -= 1
-                n[ll] = n[rr]
-                while ll < rr and n[ll] <= pivot:
-                    ll += 1
-                n[rr] = n[ll]
-            n[rr] = pivot
-            return rr
-
-        def sort(left: int, right: int):
-            if left >= right:
-                return
-            pivotIdx = split(left, right)
-            sort(left, pivotIdx - 1)
-            sort(pivotIdx + 1, right)
-
-        sort(0, len(n) - 1)
-        return n
