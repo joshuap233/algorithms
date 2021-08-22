@@ -1,6 +1,5 @@
 # https://leetcode-cn.com/problems/sort-list/
 # 148. 排序链表
-from math import floor
 from typing import Optional
 
 
@@ -42,14 +41,14 @@ class Solution1:
 
     用归并排序迭代法....归并的递归也是算空间复杂度的....
 
-    我服了，这么长的代码面试写你妈呢
+    我服了，这么长的代码面试写**
 
     1.
     先 统计链表长度
 
     2.
     归并的时候需要写额外的代码判断头结点:
-        if head1.val < head2.val:
+    if head1.val < head2.val:
         head3 = tail3 = head1
         head1 = head1.next
     else:
@@ -87,7 +86,7 @@ class Solution1:
             head = head.next
 
         step = 1
-        cnt = floor(cnt / 2)
+        cnt = cnt // 2
 
         dummyHead = ListNode(0, head)
         while step <= cnt:
@@ -118,4 +117,3 @@ class Solution1:
 
             step += step
         return dummyHead.next
-

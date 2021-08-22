@@ -1,8 +1,8 @@
 # https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/
 # 剑指 Offer 56 - I. 数组中数字出现的次数
 
-from typing import List
 from functools import reduce
+from typing import List
 
 
 class Solution:

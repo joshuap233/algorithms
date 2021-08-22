@@ -1,8 +1,8 @@
 # https://leetcode-cn.com/problems/burst-balloons/
 # 312. 戳气球
 
-from typing import List
 from functools import lru_cache
+from typing import List
 
 
 class Solution:

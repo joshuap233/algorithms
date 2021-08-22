@@ -4,8 +4,8 @@
 # 背包问题:
 # https://leetcode-cn.com/problems/target-sum/solution/dai-ma-sui-xiang-lu-494-mu-biao-he-01bei-rte9/
 
-from typing import List
 from functools import lru_cache
+from typing import List
 
 
 class Solution:

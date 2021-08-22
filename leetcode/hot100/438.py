@@ -5,7 +5,6 @@
 # leetcode/hot100/3.py
 
 from typing import List
-from collections import Counter
 
 
 class Solution:

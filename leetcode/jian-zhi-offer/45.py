@@ -1,7 +1,7 @@
 # https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/
 # 剑指 Offer 45. 把数组排成最小的数
-from typing import List
 from functools import cmp_to_key
+from typing import List
 
 
 class Solution:

@@ -1,9 +1,10 @@
 # 199. 二叉树的右视图
 # https://leetcode-cn.com/problems/binary-tree-right-side-view/
 
-from leetcode.helper.tree import TreeNode
-from typing import List
 from collections import deque
+from typing import List
+
+from leetcode.helper.tree import TreeNode
 
 
 class Solution:

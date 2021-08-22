@@ -1,9 +1,10 @@
 # https://leetcode-cn.com/problems/house-robber-iii/
 # 337. 打家劫舍 III
 
-from leetcode.helper.tree import TreeNode, generate_tree
 from functools import lru_cache
 from typing import List
+
+from leetcode.helper.tree import TreeNode, generate_tree
 
 
 class Solution:

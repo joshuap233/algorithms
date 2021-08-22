@@ -2,7 +2,6 @@
 # 143. 重排链表
 
 from leetcode.helper.link import ListNode, generate_link_list
-from collections import deque
 
 
 class Solution:

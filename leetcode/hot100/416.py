@@ -3,7 +3,6 @@
 # 01背包问题
 
 from typing import List
-from functools import lru_cache
 
 
 class Solution:

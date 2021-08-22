@@ -2,8 +2,8 @@
 # 剑指 Offer 31. 栈的压入、弹出序列
 
 
-from typing import List
 from collections import deque
+from typing import List
 
 
 # Definition for a binary tree node.

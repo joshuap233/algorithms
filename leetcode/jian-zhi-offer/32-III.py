@@ -2,8 +2,8 @@
 # 剑指 Offer 32 - III. 从上到下打印二叉树 III
 
 
-from typing import List
 from collections import deque
+from typing import List
 
 
 # Definition for a binary tree node.

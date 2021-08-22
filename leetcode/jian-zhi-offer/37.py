@@ -2,8 +2,8 @@
 # 剑指 Offer 37. 序列化二叉树
 
 
-from typing import Optional
 import json
+from typing import Optional
 
 
 class TreeNode(object):

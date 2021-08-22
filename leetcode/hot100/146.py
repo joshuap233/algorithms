@@ -2,8 +2,8 @@
 # 146. LRU 缓存机制
 # Python 有个 collections.OrderedDict
 
-from typing import Dict
 from collections import OrderedDict
+from typing import Dict
 
 
 class Node:

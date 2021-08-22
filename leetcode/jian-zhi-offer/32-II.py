@@ -1,8 +1,8 @@
 # https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-ii-lcof/
 # 剑指 Offer 32 - II. 从上到下打印二叉树 II
 
-from typing import List
 from collections import deque
+from typing import List
 
 
 class TreeNode:

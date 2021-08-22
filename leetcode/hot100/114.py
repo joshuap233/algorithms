@@ -6,8 +6,7 @@
 # 98. 验证二叉搜索树
 
 
-from leetcode.helper.tree import TreeNode, generate_tree
-from typing import Optional
+from leetcode.helper.tree import TreeNode
 
 
 class Solution:

@@ -1,8 +1,8 @@
 # https://leetcode-cn.com/problems/nge-tou-zi-de-dian-shu-lcof/
 # 剑指 Offer 60. n个骰子的点数
 
-from typing import List
 from collections import Counter
+from typing import List
 
 
 # 暴力解法,时间超限

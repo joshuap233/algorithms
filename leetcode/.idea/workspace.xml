@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7f3fecb5-1b89-4f85-b7cf-17adc01111ca" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../main.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../tree/btree.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/algorithms.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/algorithms.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/algorithms2.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/dictionaries/pjs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/leetcode/editor.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hot100/114.py" beforeDir="false" afterPath="$PROJECT_DIR$/hot100/114.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hot100/124.py" beforeDir="false" afterPath="$PROJECT_DIR$/hot100/124.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hot100/146.py" beforeDir="false" afterPath="$PROJECT_DIR$/hot100/146.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hot100/312.py" beforeDir="false" afterPath="$PROJECT_DIR$/hot100/312.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hot100/322.py" beforeDir="false" afterPath="$PROJECT_DIR$/hot100/322.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hot100/337.py" beforeDir="false" afterPath="$PROJECT_DIR$/hot100/337.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hot100/416.py" beforeDir="false" afterPath="$PROJECT_DIR$/hot100/416.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hot100/42.py" beforeDir="false" afterPath="$PROJECT_DIR$/hot100/42.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hot100/438.py" beforeDir="false" afterPath="$PROJECT_DIR$/hot100/438.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hot100/494.py" beforeDir="false" afterPath="$PROJECT_DIR$/hot100/494.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hot100/84.py" beforeDir="false" afterPath="$PROJECT_DIR$/hot100/84.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jian-zhi-offer/32-I.py" beforeDir="false" afterPath="$PROJECT_DIR$/jian-zhi-offer/32-I.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jian-zhi-offer/32-II.py" beforeDir="false" afterPath="$PROJECT_DIR$/jian-zhi-offer/32-II.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jian-zhi-offer/32-III.py" beforeDir="false" afterPath="$PROJECT_DIR$/jian-zhi-offer/32-III.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jian-zhi-offer/37.py" beforeDir="false" afterPath="$PROJECT_DIR$/jian-zhi-offer/37.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jian-zhi-offer/40.py" beforeDir="false" afterPath="$PROJECT_DIR$/jian-zhi-offer/40.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jian-zhi-offer/45.py" beforeDir="false" afterPath="$PROJECT_DIR$/jian-zhi-offer/45.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jian-zhi-offer/56.py" beforeDir="false" afterPath="$PROJECT_DIR$/jian-zhi-offer/56.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jian-zhi-offer/59-I.py" beforeDir="false" afterPath="$PROJECT_DIR$/jian-zhi-offer/59-I.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jian-zhi-offer/60.py" beforeDir="false" afterPath="$PROJECT_DIR$/jian-zhi-offer/60.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jian-zhi-offer/66.py" beforeDir="false" afterPath="$PROJECT_DIR$/jian-zhi-offer/66.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/problems/103.py" beforeDir="false" afterPath="$PROJECT_DIR$/problems/103.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/problems/143.py" beforeDir="false" afterPath="$PROJECT_DIR$/problems/143.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/problems/199.py" beforeDir="false" afterPath="$PROJECT_DIR$/problems/199.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1wlU1g3E5LiVuNdNgvCoF49bhsO" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
+  </component>
+  <component name="RunManager" selected="Python.4">
+    <configuration name="4" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/hot100" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/hot100/4.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="5" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.8" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/hot100" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <EXTENSION ID="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" />
+        </ENTRIES>
+      </EXTENSION>
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/hot100/5.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.5" />
+      <item itemvalue="Python.4" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.4" />
+        <item itemvalue="Python.5" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7f3fecb5-1b89-4f85-b7cf-17adc01111ca" name="Default Changelist" comment="" />
+      <created>1629032454722</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1629032454722</updated>
+      <workItem from="1629032455967" duration="109000" />
+      <workItem from="1629032566458" duration="25000" />
+      <workItem from="1629032682365" duration="196000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/hot100/5.py</url>
+          <line>19</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/hot100/4.py</url>
+          <line>27</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

@@ -2,7 +2,6 @@
 # 剑指 Offer 66. 构建乘积数组
 
 from typing import List
-from array import array
 
 
 class Solution:

@@ -1,8 +1,8 @@
 # https://leetcode-cn.com/problems/trapping-rain-water/
 # 42. 接雨水
 
-from typing import List
 from collections import deque
+from typing import List
 
 
 class Solution:
