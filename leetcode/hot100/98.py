@@ -61,3 +61,19 @@ class Solution1:
 
         recur(root)
         return isValid
+
+
+class Solution2:
+    def __init__(self):
+        self.prev = float('-inf')
+
+    def isValidBST(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+
+        if self.isValidBST(root.left):
+            if root.val <= self.prev:
+                return False
+            self.prev = root.val
+            return self.isValidBST(root.right)
+        return False

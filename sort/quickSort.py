@@ -1,5 +1,6 @@
 from typing import List
 
+
 """
     1. 挑选基准值：从数列中挑出一个元素，称为“基准”（pivot），
 
@@ -55,6 +56,3 @@ def quickSort(nums: List[int]):
 
     sort(0, len(nums) - 1)
     return nums
-
-
-print(quickSort([1, 2, 4, 6, 7, 3, 4]))

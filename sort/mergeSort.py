@@ -9,7 +9,7 @@ def mergesort(nums: List[int]) -> List[int]:
     """
 
     def sort(left, right) -> list:
-        if left == right:
+        if left >= right:
             return [nums[left]]
         mid = (left + right) // 2
         ll = sort(left, mid)
@@ -27,4 +27,4 @@ def mergesort(nums: List[int]) -> List[int]:
         new.extend(ll[p1:] if p1 < len(ll) else rr[p2:])
         return new
 
-    return sort(0, len(nums) - 1)
+    return sort(0, len(nums) - 1) if nums else []

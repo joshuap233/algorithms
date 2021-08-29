@@ -1,7 +1,7 @@
 from typing import List
 
 
-def insertionSort(nums: List[int]):
+def insertionSort(nums: List[int]) -> List[int]:
     """
         最佳情况时间复杂度: O(n)
         最差情况时间复杂度 O(n*n)
@@ -18,3 +18,6 @@ def insertionSort(nums: List[int]):
                 nums[j], nums[j + 1] = nums[j + 1], nums[j]
             else:
                 break
+    return nums
+
+
