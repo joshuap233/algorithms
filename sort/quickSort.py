@@ -17,11 +17,23 @@ def get_pivot1(nums: List[int], left: int, right: int):
     return left
 
 
+def get_pivot2(nums: List[int], left: int, right: int):
+    """三数中值分割法"""
+    mid = (left + right) // 2
+    if nums[left] > nums[mid]:
+        nums[left], nums[mid] = nums[mid], nums[left]
+    if nums[mid] > nums[right]:
+        nums[mid], nums[right] = nums[right], nums[mid]
+    if nums[left] > nums[mid]:
+        nums[left], nums[mid] = nums[mid], nums[left]
+    return mid
+
+
 def split(nums: List[int], left: int, right: int) -> int:
     """原地分割"""
-    pivot = get_pivot1(nums, left, right)
+    pivot = get_pivot2(nums, left, right)
     p = nums[pivot]
-
+    nums[left], nums[pivot] = nums[pivot], nums[left]
     while left < right:
         while left < right and nums[right] >= p:
             right -= 1
@@ -29,16 +41,20 @@ def split(nums: List[int], left: int, right: int) -> int:
         while left < right and nums[left] <= p:
             left += 1
         nums[right] = nums[left]
+    nums[right] = p
     return right
 
 
 def quickSort(nums: List[int]):
     def sort(left: int, right: int):
-        if left == right:
+        if left >= right:
             return
         pivotIdx = split(nums, left, right)
-        sort(left, pivotIdx)
-        sort(right, pivotIdx)
+        sort(left, pivotIdx - 1)
+        sort(pivotIdx + 1, right)
 
     sort(0, len(nums) - 1)
     return nums
+
+
+print(quickSort([1, 2, 4, 6, 7, 3, 4]))

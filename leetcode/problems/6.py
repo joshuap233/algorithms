@@ -4,4 +4,7 @@
 
 class Solution:
     def convert(self, s: str, numRows: int) -> str:
-        pass
+        res = ''
+        for i in range(numRows):
+            pass
+        return res
