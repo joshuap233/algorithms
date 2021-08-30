@@ -1,7 +1,4 @@
-import random
 from typing import Optional
-from collections import deque
-from random import randint  # 测试
 
 """
 最麻烦的删除操作:
@@ -99,23 +96,16 @@ class BSTree:
 
         return Valid(self.root)
 
-    def dumps(self):
-        # 层序遍历
-        ret = []
-        if not self.root:
-            return ret
 
-        queue = deque([self.root])
-        cur = []
-        while queue:
-            for _ in range(len(queue)):
-                e = queue.popleft()
-                if e:
-                    cur.append(e.val)
-                    queue.append(e.left)
-                    queue.append(e.right)
-            ret.append(cur)
-            cur = []
-        return ret
+if __name__ == '__main__':
+    from plot import print_tree
+    from random import randint
 
+    tree = BSTree()
+    for i in range(10):
+        new = randint(0, 20)
+        while tree.find(new):
+            new = randint(0, 20)
+        tree.insert(new)
 
+    print_tree(tree.root)
