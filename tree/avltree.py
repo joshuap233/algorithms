@@ -260,36 +260,47 @@ class AVLTree:
 if __name__ == '__main__':
     from plot import print_tree
 
-    # print_tree(tree.root)
-
     tree = AVLTree()
-    for _ in range(10000):
-        s = set()
-        debug1, debug2 = [], []
+    for i in [1, 3, 4, 5, 6, 7, 8, 2]:
+        tree.insert(i)
+        print_tree(tree.root)
+        assert tree.valid()
 
-        # 随机插入
-        for _ in range(20):
-            v = random.randint(0, 40)
-            while v in s:
+    for j in [1, 4, 6]:
+        tree.delete(j)
+        print_tree(tree.root)
+        assert tree.valid()
+
+
+    def test():
+        # 测试插入删除,直接调用即可
+        tree = AVLTree()
+        for _ in range(10000):
+            s = set()
+            debug1, debug2 = [], []
+
+            # 随机插入
+            for _ in range(20):
                 v = random.randint(0, 40)
+                while v in s:
+                    v = random.randint(0, 40)
 
-            s.add(v)
-            debug1.append(v)
-            tree.insert(v)
-            if not tree.valid():
-                print('debug1: ', debug1)
-                assert False
+                s.add(v)
+                debug1.append(v)
+                tree.insert(v)
+                if not tree.valid():
+                    print('debug1: ', debug1)
+                    assert False
 
-        # 随机删除
-        s = list(s)
-        for _ in range(20):
-            v = random.choice(s)
-            s.remove(v)
+            # 随机删除
+            s = list(s)
+            for _ in range(20):
+                v = random.choice(s)
+                s.remove(v)
 
-            debug2.append(v)
-            tree.delete(v)
-            if not tree.valid():
-                print('debug1: ', debug1)
-                print('debug2: ', debug2)
-                assert False
-
+                debug2.append(v)
+                tree.delete(v)
+                if not tree.valid():
+                    print('debug1: ', debug1)
+                    print('debug2: ', debug2)
+                    assert False
