@@ -83,37 +83,43 @@ class MinHeap:
 
 if __name__ == '__main__':
     from random import randint
+    from plot import print_heap
 
     heap = MinHeap()
+    for i in [2, 1, 4, 5, 10, 6, 7]:
+        heap.insert(i)
+        print_heap(heap.e)
 
-    for i in range(1000):
-        print(f"==== test {i} ===")
-        s = set()
-        debug = []
-        for _ in range(40):
-            v = randint(0, 1000)
 
-            while v in s:
+    def test():
+        for i in range(1000):
+            print(f"==== test {i} ===")
+            s = set()
+            debug = []
+            for _ in range(40):
                 v = randint(0, 1000)
 
-            s.add(v)
-            debug.append(v)
-            heap.insert(v)
-            if not heap.valid():
-                print("debug1: ", debug)
-                assert False
+                while v in s:
+                    v = randint(0, 1000)
 
-        debug2 = []
-        for _ in range(40):
-            e = heap.deleteMin()
-            assert e is not None
+                s.add(v)
+                debug.append(v)
+                heap.insert(v)
+                if not heap.valid():
+                    print("debug1: ", debug)
+                    assert False
 
-            debug2.append(e)
-            if not heap.valid():
-                print("debug1: ", debug)
-                print("debug2: ", debug2)
-                assert False
-            prev = e
+            debug2 = []
+            for _ in range(40):
+                e = heap.deleteMin()
+                assert e is not None
 
-        print(f"==== pass {i} ===")
-        print()
+                debug2.append(e)
+                if not heap.valid():
+                    print("debug1: ", debug)
+                    print("debug2: ", debug2)
+                    assert False
+                prev = e
+
+            print(f"==== pass {i} ===")
+            print()
