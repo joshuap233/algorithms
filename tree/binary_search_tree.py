@@ -53,9 +53,9 @@ class BSTree:
             if not node:
                 return node
 
-            if val > node.val:
+            if target > node.val:
                 node.right = Delete(node.right, target)
-            elif val < node.val:
+            elif target < node.val:
                 node.left = Delete(node.left, target)
             else:
                 if not (node.left and node.right):
@@ -107,5 +107,6 @@ if __name__ == '__main__':
         while tree.find(new):
             new = randint(0, 20)
         tree.insert(new)
+        assert tree.valid()
 
     print_tree(tree.root)

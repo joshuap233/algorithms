@@ -1,3 +1,4 @@
+import random
 from typing import Optional
 
 """
@@ -67,6 +68,23 @@ L2   NEW       R1
 
 情形 4 与情形 1 类似, 分别称为右旋转与左旋转,部分文章对左右旋转的定义与这里相反,但方法相同
 情形 2 与情形 3 类似 
+
+
+删除:
+  失衡的情况也是上面四种, 不过多了两种特殊情况:
+  1. 
+           A
+     L1        R1
+  L2     R2
+L3 R3  L4 R4
+
+ 2. 
+           A
+     L1        R1
+            L2     R2
+           L3 R3  L4 R4
+           
+这两种情况属于左旋转与右旋转
 """
 
 
@@ -101,10 +119,7 @@ class AVLTree:
             else:
                 node.left = Insert(node.left)
 
-            # 平衡
-            node = self.balance(node, val)
-
-            # 更新高
+            node = self.balance_insert(node, val)
             self.update_height(node)
             return node
 
@@ -120,9 +135,9 @@ class AVLTree:
             if not node:
                 return node
 
-            if val > node.val:
+            if target > node.val:
                 node.right = Delete(node.right, target)
-            elif val < node.val:
+            elif target < node.val:
                 node.left = Delete(node.left, target)
             else:
                 if not (node.left and node.right):
@@ -130,7 +145,7 @@ class AVLTree:
                 node.val = findMin(node.right)
                 node.right = Delete(node.right, node.val)
 
-            node = self.balance(node, val)
+            node = self.balance_delete(node)
             self.update_height(node)
             return node
 
@@ -170,7 +185,25 @@ class AVLTree:
 
         return Valid(self.root)
 
-    def balance(self, node: Node, val: int) -> Node:
+    def balance_delete(self, node: Node) -> Node:
+        ll = self.height(node.left)
+        rr = self.height(node.right)
+
+        if ll - rr == 2:
+            left = node.left
+            diff = self.height(left.left) - self.height(left.right)
+            if diff == 1 or diff == 0:
+                return self.leftRotation(node)
+            return self.doubleLeftRotation(node)
+        elif rr - ll == 2:
+            right = node.right
+            diff = self.height(right.right) - self.height(right.left)
+            if diff == 1 or diff == 0:
+                return self.rightRotation(node)
+            return self.doubleRightRotation(node)
+        return node
+
+    def balance_insert(self, node: Node, val: int) -> Node:
         ll = self.height(node.left)
         rr = self.height(node.right)
 
@@ -227,18 +260,36 @@ class AVLTree:
 if __name__ == '__main__':
     from plot import print_tree
 
+    # print_tree(tree.root)
+
     tree = AVLTree()
-    # for i in range(10):
-    #     tree.insert(i)
-    #     assert tree.valid()
-    #     print_tree(tree.root)
+    for _ in range(10000):
+        s = set()
+        debug1, debug2 = [], []
 
-    for i in [4, 2, 6, 1, 3, 5, 7, 16, 15, 14, 13, 12, 11, 10, 8, 9]:
-        tree.insert(i)
-        assert tree.valid()
-        # print_tree(tree.root)
+        # 随机插入
+        for _ in range(20):
+            v = random.randint(0, 40)
+            while v in s:
+                v = random.randint(0, 40)
 
-    for i in [16, 15]:
-        tree.delete(i)
-        print_tree(tree.root)
-        assert tree.valid()
+            s.add(v)
+            debug1.append(v)
+            tree.insert(v)
+            if not tree.valid():
+                print('debug1: ', debug1)
+                assert False
+
+        # 随机删除
+        s = list(s)
+        for _ in range(20):
+            v = random.choice(s)
+            s.remove(v)
+
+            debug2.append(v)
+            tree.delete(v)
+            if not tree.valid():
+                print('debug1: ', debug1)
+                print('debug2: ', debug2)
+                assert False
+
