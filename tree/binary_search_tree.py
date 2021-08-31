@@ -96,6 +96,9 @@ class BSTree:
 
         return Valid(self.root)
 
+    def __bool__(self) -> bool:
+        return self.root is not None
+
 
 if __name__ == '__main__':
     from plot import print_tree
