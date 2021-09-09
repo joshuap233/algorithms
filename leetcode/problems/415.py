@@ -8,25 +8,19 @@ class Solution:
 
 
 class Solution1:
-    """
-        注意遍历完成时的溢出问题:
-        if overflow:
-            res = '1' + res
-    """
-
     def addStrings(self, num1: str, num2: str) -> str:
-        if len(num1) > len(num2):
-            num1, num2 = num2, num1
-        overflow = 0
-
         res = ''
-        for i in range(len(num2)):
-            b = int(num1[-i - 1]) if abs(-i - 1) <= len(num1) else 0
-            v = b + int(num2[-i - 1]) + overflow
-            overflow = v // 10
-            res = str(v % 10) + res
-        if overflow:
-            res = '1' + res
+        p1, p2 = len(num1) - 1, len(num2) - 1
+        cur = 0
+        while p1 >= 0 or p2 >= 0 or cur:
+            if p1 >= 0:
+                cur += int(num1[p1])
+                p1 -= 1
+            if p2 >= 0:
+                cur += int(num2[p2])
+                p2 -= 1
+            res = str(cur % 10) + res
+            cur //= 10
         return res
 
 

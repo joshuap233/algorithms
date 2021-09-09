@@ -22,5 +22,36 @@ class Solution:
         return res
 
 
+class Solution1:
+    """
+        上面的解法多个了去重
+    """
+
+    def threeSumClosest(self, nums: List[int], target: int) -> int:
+        le = len(nums)
+        nums.sort()
+
+        ret = float('inf')
+        i = 0
+        while i < le:
+            ll, rr = i + 1, le - 1
+            while ll < rr:
+                s = nums[ll] + nums[rr] + nums[i]
+                if target > s:
+                    ll += 1
+                elif target < s:
+                    rr -= 1
+                else:
+                    return s
+
+                if abs(target - s) < abs(target - ret):
+                    ret = s
+
+            p = nums[i]
+            while i < le and nums[i] == p:
+                i += 1
+        return ret
+
+
 s = Solution()
 s.threeSumClosest([0, 2, 1, -3], 1)

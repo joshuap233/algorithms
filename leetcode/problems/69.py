@@ -2,16 +2,19 @@
 # 69. x 的平方根
 
 class Solution:
-    """二分...."""
+    """二分"""
 
     def mySqrt(self, x: int) -> int:
-        left, right = 0, x
-        ret = -1
-        while left <= right:
-            mid = (left + right) // 2
-            if mid * mid <= x:
+        ll, rr = 0, x
+        ret = 0
+        while ll <= rr:
+            mid = (ll + rr) // 2
+            p = mid * mid
+            if p > x:
+                rr = mid - 1
+            elif p < x:
+                ll = mid + 1
                 ret = mid
-                left = mid + 1
             else:
-                right = mid - 1
+                return mid
         return ret

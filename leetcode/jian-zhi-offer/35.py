@@ -11,22 +11,20 @@ class Node:
 class Solution:
     def copyRandomList(self, head: Node) -> Node:
         if not head:
-            return None
+            return head
 
-        tmp = head
+        h = head
+        while h:
+            nxt = h.next
+            h.next = Node(h.val, nxt, h.random)
+            h = nxt
+
+        tail = dummy = Node(0)
         while head:
-            new = Node(head.val, head.next, head.random)
-            _next = head.next
-            head.next = new
-            head = _next
+            tail.next = head.next
+            tail = tail.next
+            if tail.random:
+                tail.random = tail.random.next
+            head = head.next.next
+        return dummy.next
 
-        head = tmp
-        while head:
-            node = head.next
-            _next = node.next
-
-            node.random = head.random.next if head.random else None
-            node.next = _next.next if _next else None
-            head = _next
-
-        return tmp.next

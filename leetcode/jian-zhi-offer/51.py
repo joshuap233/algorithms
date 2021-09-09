@@ -2,6 +2,7 @@
 # 剑指 Offer 51. 数组中的逆序对
 
 from typing import List
+from bisect import bisect_left
 
 """
 python 数组赋值
@@ -18,27 +19,7 @@ Out[4]: [0, 2, 3, 0]
 
 class Solution:
     """
-        n*n*longn
-        创建一个排序辅助数组 a, 然后遍历 nums,
-        遍历过程中将元素添加到 a,
-        统计排序数组中比 当前元素 大的元素
-    """
-
-    def reversePairs(self, nums: List[int]) -> int:
-        from bisect import insort, bisect_right
-
-        tmp = []
-        cnt = 0
-        for i in nums:
-            idx = bisect_right(tmp, i)
-            cnt += len(tmp) - idx
-            insort(tmp, i)
-        return cnt
-
-
-class Solution1:
-    """
-        nlongn
+        nLogN
         利用归并排序, 将数组拆分
         比如
     先拆:
@@ -91,5 +72,19 @@ class Solution1:
         return cnt
 
 
-s = Solution1()
-s.reversePairs([7, 5, 6, 4])
+class Solution2:
+    """
+        比上面的要快
+        O(n*n)
+    """
+
+    def reversePairs(self, nums: List[int]) -> int:
+        temp = []
+        res = 0
+        for t in reversed(nums):
+            i = bisect_left(temp, t)
+            res += i
+            # python 的切片赋值比 insert 快了一大截
+            # 好像是因为切片赋值底层用的汇编的内存拷贝?
+            temp[i:i] = [t]
+        return res

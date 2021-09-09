@@ -1,26 +1,21 @@
 # https://leetcode-cn.com/problems/sum-root-to-leaf-numbers/
+# 求根节点到叶节点数字之和
 from leetcode.helper.tree import TreeNode, generate_tree
 
 
 class Solution:
     def sumNumbers(self, root: TreeNode) -> int:
-        ret = 0
-
-        def recur(s: int, node: TreeNode):
-            nonlocal ret
+        def recur(node: TreeNode, prefix: int) -> int:
             if not node:
-                return
+                return 0
 
-            s = s * 10 + node.val
             if not (node.left or node.right):
-                ret += s
-                return
+                return prefix * 10 + node.val
 
-            recur(s, node.left)
-            recur(s, node.right)
+            prefix = prefix * 10 + node.val
+            return recur(node.left, prefix) + recur(node.right, prefix)
 
-        recur(0, root)
-        return ret
+        return recur(root, 0)
 
 
 r = generate_tree([1, 0])

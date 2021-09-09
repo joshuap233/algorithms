@@ -2,34 +2,24 @@
 # 64. 最小路径和
 
 from typing import List
+from functools import lru_cache
 
 
 class Solution:
-    """
-        时间超限,时间复杂度为 2**(max_x + max_y)
-    """
+    """深搜"""
 
     def minPathSum(self, grid: List[List[int]]) -> int:
-        max_x, max_y = len(grid[0]) - 1, len(grid) - 1
+        mx, my = len(grid[0]), len(grid)
 
-        mini = float('inf')
+        @lru_cache(None)
+        def dfs(x: int, y: int) -> int:
+            if not (0 <= x < mx and 0 <= y < my):
+                return 40000
+            if x == mx - 1 and y == my - 1:
+                return grid[-1][-1]
+            return min(dfs(x + 1, y), dfs(x, y + 1)) + grid[y][x]
 
-        def traceback(x: int, y: int, cnt: int):
-            nonlocal mini
-
-            if x > max_x or y > max_y:
-                return
-
-            cnt += grid[y][x]
-
-            if x == max_x and y == max_y:
-                mini = min(mini, cnt)
-                return
-            traceback(x + 1, y, cnt)
-            traceback(x, y + 1, cnt)
-
-        traceback(0, 0, 0)
-        return mini
+        return dfs(0, 0)
 
 
 class Solution1:
@@ -53,5 +43,16 @@ class Solution1:
         return dp[-1][-1]
 
 
-s = Solution()
-s.minPathSum([[1, 2, 3], [4, 5, 6]])
+class Solution2:
+    """滚动数组"""
+    def minPathSum(self, grid: List[List[int]]) -> int:
+        mx, my = len(grid[0]), len(grid)
+        cur = [0] * (mx + 1)
+        last = [40000] * (mx + 1)
+
+        for y in range(my):
+            for x in range(1, mx + 1):
+                cur[x] = min(cur[x - 1], last[x]) + grid[y][x - 1]
+            last, cur = cur, last
+            cur[0] = 40000
+        return last[-1]

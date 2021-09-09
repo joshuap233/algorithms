@@ -23,15 +23,20 @@ class Solution:
 
 class Solution1:
     """
-        直接把公式抄过来的了....
-        dp[i]=(dp[i−1]+m)%i
+        设剩下的数字为 A,
+        剩余数字个数为 1 时, A 的位置为 0
+        剩余数字个数为 2 时, A 的位置为 (0+m)%2
+        剩余数字个数为 3 时, A 的位置为 ((0+m)%2+m)%3
+        剩余数字个数为 4 时, A 的位置为 (((0+m)%2+m)%3)%4
+        .....
+        n 此后, A 的位置为 A 在初始数组中的索引
     """
 
     def lastRemaining(self, n: int, m: int) -> int:
-        c = 0
+        pos = 0
         for i in range(2, n + 1):
-            c = (m + c) % i
-        return c
+            pos = (pos + m) % i
+        return pos
 
 
 s = Solution1()

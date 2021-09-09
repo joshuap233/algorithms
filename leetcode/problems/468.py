@@ -3,6 +3,15 @@
 
 
 class Solution:
+    """
+        这题目描述...真是吐了...
+
+        同时，在 IPv6 地址中，多余的 0 也是不被允许的。比如:
+            02001:0db8:85a3:0000:0000:8a2e:0370:7334
+        是无效的
+
+        这里多余的 0 指的是 02001 超过了 4 位....
+    """
     def validIPAddress(self, ip: str) -> str:
         def validIpv4() -> bool:
             ips = ip.split('.')

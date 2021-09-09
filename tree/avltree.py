@@ -102,6 +102,10 @@ class Node:
 
 
 class AVLTree:
+    """
+        增删改查时间复杂度为 O(logN)
+    """
+
     def __init__(self):
         self.root: Optional[Node] = None
 
@@ -191,14 +195,12 @@ class AVLTree:
 
         if ll - rr == 2:
             left = node.left
-            diff = self.height(left.left) - self.height(left.right)
-            if diff == 1 or diff == 0:
+            if self.height(left.left) - self.height(left.right) >= 0:
                 return self.leftRotation(node)
             return self.doubleLeftRotation(node)
         elif rr - ll == 2:
             right = node.right
-            diff = self.height(right.right) - self.height(right.left)
-            if diff == 1 or diff == 0:
+            if self.height(right.right) - self.height(right.left) >= 0:
                 return self.rightRotation(node)
             return self.doubleRightRotation(node)
         return node
@@ -264,6 +266,7 @@ if __name__ == '__main__':
     from plot import print_tree
 
     tree = AVLTree()
+
     for i in [1, 3, 4, 5, 6, 7, 8, 2]:
         tree.insert(i)
         print_tree(tree.root)

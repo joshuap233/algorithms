@@ -23,7 +23,21 @@ class Solution:
         return 0
 
 
-s = Solution()
-s.compareVersion(
-    "1.01"
-    , "1.001")
+class Solution1:
+    """思路二"""
+
+    def compareVersion(self, version1: str, version2: str) -> int:
+        v1 = list(map(int, version1.split(".")))
+        v2 = list(map(int, version2.split(".")))
+
+        m = min(len(v1), len(v2))
+        for p in range(m):
+            a, b = int(v1[p]), int(v2[p])
+            if a > b:
+                return 1
+            elif a < b:
+                return -1
+
+        if sum(v1[m:]) != sum(v2[m:]):
+            return 1 if len(v1) > len(v2) else -1
+        return 0

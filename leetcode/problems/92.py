@@ -5,22 +5,20 @@ from leetcode.helper.link import ListNode, generate_link_list
 
 class Solution:
     def reverseBetween(self, head: ListNode, left: int, right: int) -> ListNode:
-        dummy = ListNode(0, head)
-        head = dummy
+        tail = dummy = ListNode(0, head)
 
-        for _ in range(left - 1):
-            head = head.next
+        for i in range(left - 1):
+            tail = tail.next
 
         prev = None
-        cur = head.next
+        tmp = h = tail.next
         for _ in range(left, right + 1):
-            nex = cur.next
-            cur.next = prev
-            prev = cur
-            cur = nex
-        if head.next:
-            head.next.next = cur
-        head.next = prev
+            nxt = h.next
+            h.next = prev
+            prev = h
+            h = nxt
+        tail.next = prev
+        tmp.next = h
         return dummy.next
 
 

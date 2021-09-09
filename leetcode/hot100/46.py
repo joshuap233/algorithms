@@ -10,27 +10,6 @@ from typing import List
 
 class Solution:
     """
-        使用递归,每层递归去掉个数字,将去掉的数字添加到
-        head
-    """
-
-    def permute(self, nums: List[int]) -> List[List[int]]:
-        res = []
-
-        def recur(head: list, ll: list):
-            if len(ll) == 1:
-                head.extend(ll)
-                res.append(head)
-
-            for i, v in enumerate(ll):
-                recur(head[:] + [v], ll[:i] + ll[i + 1:])
-
-        recur([], nums)
-        return res
-
-
-class Solution1:
-    """
         回溯:
     """
 
@@ -38,7 +17,7 @@ class Solution1:
         res = []
 
         def backtrack(first):
-            if first == len(nums)-1:
+            if first == len(nums) - 1:
                 res.append(nums[:])
                 return
             # first 之前的数已经填过

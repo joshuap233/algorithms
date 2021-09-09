@@ -2,6 +2,7 @@
 # 23. 合并K个升序链表
 
 from typing import List, Optional
+from heapq import heappop, heappush
 
 
 # Definition for singly-linked list.
@@ -76,3 +77,27 @@ class Solution1:
             return head.next
 
         return merge(0, len(lists) - 1)
+
+
+class Solution2:
+    """
+        用堆合并, 时间复杂度为 O(logK) (堆中元素个数 <= k)
+        空间复杂度为 O(K)
+    """
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+        new = []
+        for i, node in enumerate(lists):
+            node and heappush(new, (node.val, i))
+
+        tail = dummy = ListNode(0)
+        while new:
+            i = heappop(new)[1]
+            tail.next = lists[i]
+            tail = tail.next
+            Next = tail.next
+
+            lists[i] = Next
+            if Next:
+                heappush(new, (Next.val, i))
+
+        return dummy.next

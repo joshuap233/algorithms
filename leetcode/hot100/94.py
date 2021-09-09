@@ -3,6 +3,7 @@
 
 
 from typing import List
+from collections import deque
 
 
 # Definition for a binary tree node.
@@ -32,14 +33,15 @@ class Solution1:
     """迭代"""
 
     def inorderTraversal(self, root: TreeNode) -> List[int]:
-        stack = []
-        res = []
+        ret = []
+        q = deque()
 
-        while stack or root:
+        while root or q:
             while root:
-                stack.append(root)
+                q.append(root)
                 root = root.left
-            root = stack.pop(-1)
-            res.append(root.val)
+
+            root = q.pop()
+            ret.append(root.val)
             root = root.right
-        return res
+        return ret

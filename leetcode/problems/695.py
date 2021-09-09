@@ -15,31 +15,17 @@ class Solution:
     """
 
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-        maxi = 0
         mx, my = len(grid[0]), len(grid)
 
-        def dfs(x: int, y: int):
-            nonlocal cnt, maxi
-            if 0 <= x < mx and 0 <= y < my and grid[y][x] == 1:
-                cnt += 1
-                grid[y][x] = 0
-                dfs(x, y + 1)
-                dfs(x, y - 1)
-                dfs(x + 1, y)
-                dfs(x - 1, y)
+        def dfs(x: int, y: int) -> int:
+            if not (0 <= x < mx and 0 <= y < my) or grid[y][x] == 0:
+                return 0
+            grid[y][x] = 0
+            return dfs(x + 1, y) + dfs(x - 1, y) + dfs(x, y + 1) + dfs(x, y - 1) + 1
 
-        cnt = 0
-        for y, array in enumerate(grid):
-            for x, v in enumerate(array):
-                if v == 1:
-                    dfs(x, y)
-                    maxi = max(maxi, cnt)
-                    cnt = 0
+        maxi = 0
+        for j in range(my):
+            for i in range(mx):
+                if grid[j][i] == 1:
+                    maxi = max(maxi, dfs(i, j))
         return maxi
-
-
-s = Solution()
-s.maxAreaOfIsland([[0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
-                   [0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0],
-                   [0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
-                   [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0]])

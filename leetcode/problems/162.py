@@ -29,3 +29,19 @@ class Solution1:
             else:
                 right = mid
         return left
+
+
+class Solution1:
+    """比上面的好理解一点"""
+
+    def findPeakElement(self, nums: List[int]) -> int:
+        ll, rr = 0, len(nums) - 1
+        nums.append(float('-inf'))
+        while ll <= rr:
+            mid = (ll + rr) // 2
+            if nums[mid] < nums[mid + 1]:
+                ll = mid + 1
+            elif nums[mid] > nums[mid - 1]:
+                return mid
+            else:
+                rr = mid - 1

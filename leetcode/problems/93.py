@@ -30,26 +30,25 @@ class Solution:
 
 class Solution1:
     def restoreIpAddresses(self, s: str) -> List[str]:
-        res = []
-        cur = []
-        n = len(s)
-
         def backtrace(left: int):
             if cur:
                 last = cur[-1]
-                if int(last) > 255 or (len(last) != 1 and last[0] == '0'):
+                if len(last) > 1 and last[0] == '0':
                     return
-
+                if len(last) == 3 and int(last) > 255:
+                    return
             if len(cur) == 4:
-                if left == n:
-                    res.append('.'.join(cur))
-                return
+                if left < le:
+                    return
+                ret.append('.'.join(cur))
 
-            cur.append('')
-            for i in range(left, min(left + 3, n)):
-                cur[-1] += s[i]
+            for i in range(left, min(le, left + 3)):
+                cur.append(s[left:i + 1])
                 backtrace(i + 1)
-            cur.pop(-1)
+                cur.pop(-1)
 
+        le = len(s)
+        cur = []
+        ret = []
         backtrace(0)
-        return res
+        return ret

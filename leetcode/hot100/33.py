@@ -48,5 +48,32 @@ class Solution:
         return -1
 
 
+class Solution1:
+    """
+        上面的代码优化
+    """
+
+    def search(self, nums: List[int], target: int) -> int:
+        ll, rr = 0, len(nums) - 1
+        while ll <= rr:
+            mid = (ll + rr) // 2
+            if nums[mid] == target:
+                return mid
+
+            # 左边有序
+            if nums[mid] >= nums[0]:
+                if nums[ll] <= target < nums[mid]:
+                    rr = mid - 1
+                else:
+                    ll = mid + 1
+            # 右边有序
+            else:
+                if nums[mid] < target <= nums[rr]:
+                    ll = mid + 1
+                else:
+                    rr = mid - 1
+        return -1
+
+
 s = Solution()
 s.search([1, 3, 5], 1)

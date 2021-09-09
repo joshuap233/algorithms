@@ -1,7 +1,7 @@
 # https://leetcode-cn.com/problems/shu-ju-liu-zhong-de-zhong-wei-shu-lcof/
 # 剑指 Offer 41. 数据流中的中位数
 from bisect import insort
-from heapq import heappop, heappush
+from heapq import heappop, heappush, heappushpop
 
 
 class MedianFinder:
@@ -53,6 +53,26 @@ class MedianFinder1:
         if ll % 2 == 0:
             return (self.min[0] - self.max[0]) / 2
         return self.min[0]
+
+
+class MedianFinder2:
+    """上面的代码优化"""
+
+    def __init__(self):
+        self.mini = []  # 存最大的一半
+        self.maxi = []  # 存最小的一半
+        # 最大堆 - 最小堆 = 1 or 0
+
+    def addNum(self, num: int) -> None:
+        if len(self.mini) == len(self.maxi):
+            heappush(self.maxi, -heappushpop(self.mini, num))
+        else:
+            heappush(self.mini, -heappushpop(self.maxi, -num))
+
+    def findMedian(self) -> float:
+        if len(self.mini) == len(self.maxi):
+            return (self.mini[0] - self.maxi[0]) / 2
+        return -self.maxi[0]
 
 
 s = MedianFinder1()

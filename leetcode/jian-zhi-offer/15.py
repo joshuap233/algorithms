@@ -20,3 +20,13 @@ class Solution1:
         return i
 
 
+class Solution2:
+    """
+        O(logN)
+    """
+    def hammingWeight(self, n: int) -> int:
+        ret = 0
+        while n:
+            n &= n - 1
+            ret += 1
+        return ret

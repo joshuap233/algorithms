@@ -2,6 +2,7 @@
 # 739. 每日温度
 
 from typing import List
+from collections import deque
 
 
 class Solution:
@@ -12,17 +13,11 @@ class Solution:
     """
 
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-        stack = []
+        stack = deque()
         res = [0] * len(temperatures)
-
-        for i, v in enumerate(temperatures):
-            if not stack or temperatures[stack[-1]] >= v:
-                stack.append(i)
-            else:
-                while stack and temperatures[stack[-1]] < v:
-                    ii = stack.pop(-1)
-                    res[ii] = i - ii
-                stack.append(i)
-        for i in stack:
-            res[i] = 0
+        for i, t in enumerate(temperatures):
+            while stack and temperatures[stack[-1]] < t:
+                e = stack.pop()
+                res[e] = i - e
+            stack.append(i)
         return res

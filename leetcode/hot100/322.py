@@ -63,21 +63,23 @@ class Solution1:
 class Solution2:
     """
         面值为3元、6元、7元, 凑出 18 元
-        贪心:
-          7+7+3 .... 明显不行
+        贪心: 7+7+3 .... 明显不行
 
-        动态规划....上面的递归改成迭代...
+        深搜思路: 尝试 coins[0] ~ coins[-1], 如果小于 amount,
+        继续搜索
+
+        深搜优化, 总额相同时,选择使用硬币最少的那个,然后继续搜索(剪枝)
+
+        使用动态规划优化,正向递推
     """
 
     def coinChange(self, coins: List[int], amount: int) -> int:
         dp = [float('inf')] * (amount + 1)
         dp[0] = 0
-
-        for coin in coins:
-            for x in range(coin, amount + 1):
-                dp[x] = min(dp[x], dp[x - coin] + 1)
-        return -1 if math.isinf(dp[amount]) else dp[amount]
-
+        for c in coins:
+            for i in range(c, amount + 1):
+                dp[i] = min(dp[i], dp[i - c] + 1)
+        return -1 if math.isinf(dp[-1]) else dp[-1]
 
 
 s = Solution()

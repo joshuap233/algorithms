@@ -42,7 +42,7 @@ class Solution:
         return cnt
 
 
-class Solution:
+class Solution1:
     """
         上面的代码优化下
     """

@@ -3,6 +3,7 @@
 
 
 from typing import List
+from collections import deque
 
 
 class Solution:
@@ -13,6 +14,7 @@ class Solution:
         1 0 1 0 1
         1 1 1 0 1
     """
+
     def numIslands(self, grid: List[List[str]]) -> int:
         cnt = 0
 
@@ -34,5 +36,28 @@ class Solution:
         return cnt
 
 
-s = Solution()
-s.numIslands([["1", "0", "1", "1", "1"], ["1", "0", "1", "0", "1"], ["1", "1", "1", "0", "1"]])
+class Solution1:
+    """广搜"""
+
+    def numIslands(self, grid: List[List[str]]) -> int:
+        maxX, maxY = len(grid[0]), len(grid)
+        cnt = 0
+        q = deque()
+
+        def bfs(x: int, y: int):
+            grid[y][x] = '0'
+            q.append((x, y))
+            while q:
+                x, y = q.popleft()
+                for nx, ny in [(0, 1), (1, 0), (0, -1), (- 1, 0)]:
+                    cx, cy = x + nx, y + ny
+                    if 0 <= cx < maxX and 0 <= cy < maxY and grid[cy][cx] == '1':
+                        q.append((cx, cy))
+                        grid[cy][cx] = '0'
+
+        for y in range(maxY):
+            for x in range(maxX):
+                if grid[y][x] == '1':
+                    cnt += 1
+                    bfs(x, y)
+        return cnt

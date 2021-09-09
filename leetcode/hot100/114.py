@@ -47,21 +47,18 @@ class Solution1:
     """
 
     def flatten(self, root: TreeNode) -> None:
-        prev = None
+        tail = TreeNode(0)
 
         def recur(node: TreeNode):
-            nonlocal prev
-
+            nonlocal tail
             if not node:
                 return
 
-            right = node.right
-            if prev:
-                prev.right = node
-            prev = node
-
-            recur(node.left)
-            node.left = None
-            recur(right)
+            ll, rr = node.left, node.right
+            tail.right = node
+            tail.left = None
+            tail = tail.right
+            recur(ll)
+            recur(rr)
 
         recur(root)

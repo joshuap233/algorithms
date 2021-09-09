@@ -32,26 +32,6 @@ class Solution1:
     """
 
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        res = []
-
-        def recur(left: int, array: list) -> None:
-            res.append(array)
-
-            for i in range(left, len(nums)):
-                recur(i + 1, array + [nums[i]])
-
-        recur(0, [])
-        return res
-
-
-class Solution2:
-    """
-        上面的代码优化
-    """
-
-    def subsets(self, nums: List[int]) -> List[List[int]]:
-        res = []
-
         def backtrace(left: int) -> None:
             res.append(num[:])
 
@@ -60,6 +40,7 @@ class Solution2:
                 backtrace(i + 1)
                 num.pop()
 
+        res = []
         num = []
         backtrace(0)
         return res

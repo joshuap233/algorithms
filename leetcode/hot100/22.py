@@ -3,7 +3,7 @@
 # 这题和全排列类似
 
 from typing import List
-
+from collections import deque
 
 class Solution:
     """
@@ -49,14 +49,14 @@ class Solution1:
             if left > 0:
                 cur.append('(')
                 backtrack(left - 1, right)
-                cur.pop(-1)
+                cur.pop()
 
             if left < right:
                 cur.append(')')
                 backtrack(left, right - 1)
-                cur.pop(-1)
+                cur.pop()
 
-        cur = []
+        cur = deque()
         backtrack(n, n)
         return res
 

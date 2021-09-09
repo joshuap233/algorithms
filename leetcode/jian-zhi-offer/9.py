@@ -4,34 +4,20 @@
 from array import array
 
 
-class Stack:
-    def __init__(self):
-        self.data = array('i')
-
-    def pop(self) -> int:
-        return self.data.pop(-1)
-
-    def push(self, value: int) -> None:
-        self.data.append(value)
-
-    def empty(self) -> bool:
-        return len(self.data) == 0
-
-
 class CQueue:
 
     def __init__(self):
-        self.stack1 = Stack()
-        self.stack2 = Stack()
+        self.s1 = []
+        self.s2 = []
 
     def appendTail(self, value: int) -> None:
-        self.stack1.push(value)
+        self.s1.append(value)
 
     def deleteHead(self) -> int:
-        if self.stack2.empty():
-            while not self.stack1.empty():
-                self.stack2.push(self.stack1.pop())
-        if self.stack2.empty():
+        if not (self.s1 or self.s2):
             return -1
-        return self.stack2.pop()
 
+        if not self.s2:
+            self.s2 = self.s1[::-1]
+            self.s1 = []
+        return self.s2.pop(-1)

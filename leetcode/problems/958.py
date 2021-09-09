@@ -3,6 +3,10 @@ from collections import deque
 
 
 class Solution:
+    """
+        从左到右遍历, 遇到空节点设置 flag,
+        设置 flag 后在遇到 非空节点返回 False
+    """
     def isCompleteTree(self, root: TreeNode) -> bool:
         queue = deque([root])
         end = False
