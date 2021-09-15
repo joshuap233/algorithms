@@ -1,5 +1,5 @@
 # https://leetcode-cn.com/problems/subarray-sum-equals-k/
-# 560. 和为K的子数组
+# 560. 和为 K 的子数组
 
 from typing import List
 
@@ -26,15 +26,13 @@ class Solution:
         from collections import Counter
         counter = Counter({0: 1})
 
-        Sum = 0
-        cnt = 0
+        ret = Sum = 0
         for i in nums:
             Sum += i
-
             if Sum - k in counter:
-                cnt += counter[Sum - k]
+                ret += counter[Sum - k]
             counter[Sum] += 1
-        return cnt
+        return ret
 
 
 s = Solution()

@@ -32,8 +32,7 @@ class Solution1:
     """
 
     def rob(self, nums: List[int]) -> int:
-        r0, r1 = nums[0], 0
-
-        for i in range(1, len(nums)):
-            r0, r1 = r1 + nums[i], max(r0, r1)
-        return max(r0, r1)
+        a, b = 0, 0
+        for i in nums:
+            a, b = b, max(b, a + i)
+        return b

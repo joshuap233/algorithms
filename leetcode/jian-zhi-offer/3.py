@@ -18,33 +18,21 @@ class Solution:
             s.add(i)
 
 
-# 这个 84 秒
-class Solution2:
-    def __init__(self):
-        self.set = set()
-
-    def findRepeatNumber(self, nums: List[int]) -> int:
-        for i in nums:
-            if i in self.set:
-                return i
-            self.set.add(i)
-
-
 class Solution1:
     """
-        O(n) 时间复杂度, O(1) 空间复杂度, 慢的离谱....
+        O(n) 时间复杂度, O(1) 空间复杂度
     """
-
     def findRepeatNumber(self, nums: List[int]) -> int:
         i = 0
         while i < len(nums):
             v = nums[i]
-            if nums[i] != i:
-                if nums[i] == nums[v]:
-                    return nums[i]
+            while v != i and nums[v] != v:
                 nums[i], nums[v] = nums[v], nums[i]
-            else:
-                i += 1
+                v = nums[i]
+
+            if v != i:
+                return v
+            i += 1
 
 
 s = Solution1()

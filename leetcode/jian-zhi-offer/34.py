@@ -11,47 +11,28 @@ class TreeNode:
         self.right = right
 
 
-# 树的根节点开始往下一直到叶节点所经过的节点形成一条路径
-# 必须是到叶子节点的路径
 class Solution:
+    """
+    `   树的根节点开始往下一直到叶节点所经过的节点形成一条路径
+        必须是到叶子节点的路径
+    """
+
     def pathSum(self, root: TreeNode, target: int) -> List[List[int]]:
-        res = []
+        def backtrace(node: TreeNode, s: int):
+            if not node:
+                return
 
-        if not root:
-            return res
+            cur.append(node.val)
+            s += node.val
+            if not (node.left or node.right):
+                if s == target:
+                    ret.append(cur[:])
+            else:
+                backtrace(node.left, s)
+                backtrace(node.right, s)
+            cur.pop()
 
-        def recur(node: TreeNode, path: list, tg: int):
-            tg -= node.val
-            path = path[:]
-            path.append(node.val)
-
-            if not node.left and not node.right and tg == 0:
-                res.append(path)
-            node.left and recur(node.left, path, tg)
-            node.right and recur(node.right, path, tg)
-
-        recur(root, [], target)
-        return res
-
-
-# 优化 path 的复制次数(使用回溯)
-class Solution1:
-    def pathSum(self, root: TreeNode, target: int) -> List[List[int]]:
-        res = []
-        path = []
-
-        if not root:
-            return res
-
-        def recur(node: TreeNode, tg: int):
-            tg -= node.val
-            path.append(node.val)
-
-            if not node.left and not node.right and tg == 0:
-                res.append(path[:])
-            node.left and recur(node.left, tg)
-            node.right and recur(node.right, tg)
-            path.pop(-1)
-
-        recur(root, target)
-        return res
+        ret = []
+        cur = []
+        backtrace(root, 0)
+        return ret

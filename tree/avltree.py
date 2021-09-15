@@ -1,4 +1,3 @@
-import random
 from typing import Optional
 
 """
@@ -89,6 +88,8 @@ L3 R3  L4 R4
 
 
 class Node:
+    # 可以添加一个 key 字段, 这里仅使用 val 来查找
+
     def __init__(
             self, val: int,
             left: Optional['Node'] = None,
@@ -264,6 +265,7 @@ class AVLTree:
 
 if __name__ == '__main__':
     from plot import print_tree
+    import random
 
     tree = AVLTree()
 

@@ -51,5 +51,31 @@ class Solution:
         return [ll, rr]
 
 
-s = Solution()
-s.searchRange([8, 9], 8)
+class Solution1:
+    """
+        比上面的好理解一点
+    """
+
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        def binary_search(ll: int, rr: int, low: bool):
+            while ll <= rr:
+                mid = (ll + rr) // 2
+                if nums[mid] > target:
+                    rr = mid - 1
+                elif nums[mid] < target:
+                    ll = mid + 1
+                else:
+                    if low:
+                        if mid == 0 or nums[mid - 1] != target:
+                            return mid
+                        rr = mid - 1
+                    else:
+                        if mid == len(nums) - 1 or nums[mid + 1] != target:
+                            return mid
+                        ll = mid + 1
+            return -1
+
+        res = [-1, -1]
+        res[0] = binary_search(0, len(nums) - 1, True)
+        res[1] = binary_search(0, len(nums) - 1, False)
+        return res

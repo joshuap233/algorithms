@@ -6,12 +6,10 @@ from leetcode.helper.link import ListNode
 
 class Solution:
     def deleteDuplicates(self, head: ListNode) -> ListNode:
-        tail = dummy = ListNode(head)
-        prev = None
+        tail = dummy = ListNode(0)
         while head:
-            if head.val != prev and (not head.next or head.next.val != head.val):
+            if not head.next or head.next.val != head.val:
                 tail.next = head
-                tail = head
-            prev = head
+                tail = tail.next
             head = head.next
         return dummy.next

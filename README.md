@@ -5,7 +5,7 @@
 <br/>
 树结构可以使用 plot.py 的 print_tree 查看视图, 用于 DEBUG:
 
-![pic](./p.png)
+![pic](./pic/p.png)
 
 ## 算法:
 
@@ -22,7 +22,7 @@
 2. 二叉搜索树
 3. AVL 树
 4. 二叉堆
-5. 红黑树
+5. 红黑树 
 
 
 TODO:

@@ -20,22 +20,19 @@ class Solution:
     """
 
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
-        start = sorted([i[0] for i in intervals])
-        end = sorted([i[1] for i in intervals])
+        start = sorted(intervals, key=lambda x: x[0])
+        end = intervals
+        end.sort(key=lambda x: x[1])
 
-        maxi = num = 0
-        i = j = 0
-        # start[i] == end[j] 的情况没有为什么也能对?
-        while i < len(start):
-            if start[i] < end[j]:  # 上车
-                num += 1
-                i += 1
-            else:
-                num -= 1  # 下车
-                j += 1
-            maxi = max(maxi, num)
+        maxi = cnt = 0
+        p = 0
+        for i in start:
+            cnt += 1
+            while end[p][1] <= i[0]:
+                cnt -= 1
+                p += 1
+            maxi = max(maxi, cnt)
         return maxi
-
 
 
 s = Solution()

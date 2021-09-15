@@ -44,7 +44,24 @@ class Solution1:
 
 
 class Solution2:
+    """
+        上面的算法优化
+    """
+
+    def minPathSum(self, grid: List[List[int]]) -> int:
+        maxX, maxY = len(grid[0]), len(grid)
+        dp = [[40000] * (maxX + 1) for _ in range(maxY + 1)]
+
+        dp[0][1] = 0
+        for y in range(1, maxY + 1):
+            for x in range(1, maxX + 1):
+                dp[y][x] = min(dp[y - 1][x], dp[y][x - 1]) + grid[y - 1][x - 1]
+        return dp[-1][-1]
+
+
+class Solution3:
     """滚动数组"""
+
     def minPathSum(self, grid: List[List[int]]) -> int:
         mx, my = len(grid[0]), len(grid)
         cur = [0] * (mx + 1)

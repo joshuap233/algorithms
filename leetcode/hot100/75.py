@@ -25,33 +25,23 @@ class Solution:
         当遇到 1,1 时...算法已经无法继续....
 
         换种思路,设立三个指针, left,right,i, i用于一趟扫描
-        1. num[i] 为 0, 与 num[left] 交换, i+=1
-        2. nums[i] 为 2, 与 nums[right] 交换,
-        3. num[i] 为 1, i+=1
-
-        第一种情况, 未交换前, num[left] 必然为 1,否则就是第二种情况,
-        也就是说, i ~ left 必然全为 1 ,因此 i+1
-
-        第二种情况, 未交换前, num[right] 可能为 0 或 1
-        如果为 0 , 那么交换后可能出现这种顺序:
-        0,0,0,1,1 [0],xxx
-        因此 i 指针能移动
-
+        left 指向左边非红色, right 指向非黑色
+        i 遇到黑色, 与 right 指向的元素交换
+        i 遇到红色, 与 left 指向的元素交换
     """
 
     def sortColors(self, nums: List[int]) -> None:
-        left, right = 0, len(nums) - 1
-        i = 0
+        i = left = 0
+        right = len(nums) - 1
         while i <= right:
+            if nums[i] == 2:
+                while i < right and nums[right] == 2:
+                    right -= 1
+                nums[i], nums[right] = nums[right], nums[i]
             if nums[i] == 0:
-                nums[left], nums[i] = nums[i], nums[left]
-                i += 1
+                nums[i], nums[left] = nums[left], nums[i]
                 left += 1
-            elif nums[i] == 2:
-                nums[right], nums[i] = nums[i], nums[right]
-                right -= 1
-            else:
-                i += 1
+            i += 1
 
 
 s = Solution()

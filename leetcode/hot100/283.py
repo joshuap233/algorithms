@@ -10,11 +10,12 @@ class Solution:
          nums[i - cnt] = 当前值
     """
     def moveZeroes(self, nums: List[int]) -> None:
-        cnt = 0
+        zero = 0
         for i, v in enumerate(nums):
             if v == 0:
-                cnt += 1
+                zero += 1
             else:
-                nums[i - cnt] = v
-        for i in range(len(nums) - cnt, len(nums)):
-            nums[i] = 0
+                nums[i-zero] = v
+
+        for i in range(zero):
+            nums[-i - 1] = 0

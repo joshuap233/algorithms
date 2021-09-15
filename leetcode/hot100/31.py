@@ -30,7 +30,8 @@ class Solution:
         # 交换
         nums[j], nums[i] = nums[i], nums[j]
 
-        # 逆序
+        # 逆序, 逆序可以直接写成:
+        # nums[i + 1:] = nums[le - 1:i:-1]
         ll, rr = i + 1, le - 1
         while ll < rr:
             nums[ll], nums[rr] = nums[rr], nums[ll]

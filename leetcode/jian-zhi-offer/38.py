@@ -3,26 +3,12 @@
 from typing import List
 
 
-# 递归
 class Solution:
+    """
+        哈希去重
+    """
+
     def permutation(self, s: str) -> List[str]:
-        res = set()
-
-        def recur(head: str, string: str):
-            if not string:
-                res.add(head)
-            for i, v in enumerate(string):
-                recur(head + v, string[:i] + string[i + 1:])
-
-        recur('', s)
-
-        return list(res)
-
-
-class Solution1:
-    def permutation(self, s: str) -> List[str]:
-        res = set()
-        s = list(s)
 
         def backtrace(left: int):
             if left == len(s):
@@ -33,9 +19,32 @@ class Solution1:
                 backtrace(left + 1)
                 s[left], s[i] = s[i], s[left]
 
+        res = set()
+        s = list(s)
         backtrace(0)
-
         return list(res)
+
+
+class Solution1:
+    def permutation(self, s: str) -> List[str]:
+        def backtrace(left: int):
+            if left == len(s) - 1:
+                ret.append(''.join(cur))
+
+            # 去重
+            d = set()
+            for i in range(left, len(cur)):
+                if cur[i] in d:
+                    continue
+                d.add(cur[i])
+                cur[i], cur[left] = cur[left], cur[i]
+                backtrace(left + 1)
+                cur[i], cur[left] = cur[left], cur[i]
+
+        cur = list(s)
+        ret = []
+        backtrace(0)
+        return ret
 
 
 # 即获取下一个字典序排列
@@ -75,7 +84,3 @@ class Solution2:
                 res.append(''.join(tmp))
             else:
                 return res
-
-
-s = Solution1()
-print(s.permutation("abc"))

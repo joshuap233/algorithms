@@ -28,7 +28,7 @@ class Solution:
 
 
 # 上面方法的优化
-class Solution:
+class Solution1:
     def verifyPostorder(self, nodes: List[int]) -> bool:
         def recur(left: int, right: int) -> bool:
             if right <= left:

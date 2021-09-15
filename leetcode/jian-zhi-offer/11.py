@@ -5,20 +5,10 @@ from typing import List
 
 
 class Solution:
-    def minArray(self, numbers: List[int]) -> int:
-        if len(numbers) == 0:
-            return 0
-
-        prev = float('inf')
-        for i in numbers[::-1]:
-            if i > prev:
-                return prev
-            prev = i
-        return numbers[0]
-
-
-class Solution1:
-    """二分"""
+    """
+        二分
+        好恶心的题
+    """
 
     def minArray(self, numbers: List[int]) -> int:
         left, right = 0, len(numbers) - 1

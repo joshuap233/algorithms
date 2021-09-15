@@ -1,6 +1,5 @@
 from typing import List
 
-
 """
     1. 挑选基准值：从数列中挑出一个元素，称为“基准”（pivot），
 
@@ -30,7 +29,7 @@ def get_pivot2(nums: List[int], left: int, right: int):
     return mid
 
 
-def split(nums: List[int], left: int, right: int) -> int:
+def partition(nums: List[int], left: int, right: int) -> int:
     """原地分割"""
     pivot = get_pivot2(nums, left, right)
     p = nums[pivot]
@@ -42,6 +41,7 @@ def split(nums: List[int], left: int, right: int) -> int:
         while left < right and nums[left] <= p:
             left += 1
         nums[right] = nums[left]
+    # 最终 left 会 right 重合
     nums[right] = p
     return right
 
@@ -50,9 +50,31 @@ def quickSort(nums: List[int]):
     def sort(left: int, right: int):
         if left >= right:
             return
-        pivotIdx = split(nums, left, right)
+        pivotIdx = partition(nums, left, right)
         sort(left, pivotIdx - 1)
         sort(pivotIdx + 1, right)
 
     sort(0, len(nums) - 1)
     return nums
+
+
+def three_way_partition(nums: List[int], left: int, right: int) -> int:
+    """
+        三路排序,将等于枢纽的值放到中间,
+        可以用来解决荷兰旗问题(leetcode 颜色分类)
+        比二路排序多一个指针
+    """
+    pivot = get_pivot2(nums, left, right)
+    p = nums[pivot]
+
+    i = left
+    while i <= right:
+        if nums[i] > p:
+            while i < right and nums[right] > p:
+                right -= 1
+            nums[i], nums[right] = nums[right], nums[i]
+        if nums[i] < p:
+            nums[i], nums[left] = nums[left], nums[i]
+            left += 1
+        i += 1
+

@@ -7,3 +7,4 @@ __pycache__/
 .idea
 note/
 other/
+foo.py

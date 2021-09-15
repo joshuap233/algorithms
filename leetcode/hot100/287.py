@@ -22,6 +22,9 @@ class Solution:
 
         至于 [2,1,3] 这种情况, 1->1 也能形成环,但,如果没有其他
         索引为 1 的数,不可能跳转到索引 1
+
+        这题有 n+1 个数, 也就是索引为 0 - n,
+        数字都在 1,n 之间, 索引与值恰好对应
     """
 
     def findDuplicate(self, nums: List[int]) -> int:
@@ -38,3 +41,22 @@ class Solution:
                     slow = nums[slow]
                     p = nums[p]
                 return p
+
+
+class Solution1:
+    """修改数组然后还原.."""
+
+    def findDuplicate(self, nums: List[int]) -> int:
+        n = len(nums)
+        i = 0
+        for i, v in enumerate(nums):
+            v = v % n
+            if nums[v] > n:
+                i = v
+                break
+            nums[v] += n
+
+        for j, v in enumerate(nums):
+            if v > n:
+                nums[j] -= n
+        return i

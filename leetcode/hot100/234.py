@@ -27,10 +27,7 @@ class Solution:
 class Solution1:
     """
        O(n) 时间复杂度和 O(1) 空间复杂度,
-       没说不能修改链表?? 算法结束改回来就行....
-       感觉会限制修改链表...
-
-        mmp 官方题解就是修改链表再改回来.....说你*呢....
+      反转一半链表再判断
     """
 
     def isPalindrome(self, head: ListNode) -> bool:
@@ -50,3 +47,19 @@ class Solution1:
             pre = pre.next
             slow = slow.next
         return True
+
+
+class Solution2:
+    """
+        0 <= Node.val <= 9
+        时间超限.......
+    """
+    def isPalindrome(self, head: ListNode) -> bool:
+        s1 = s2 = 0
+        t = 1
+        while head:
+            s1 = s1 * 10 + head.val
+            s2 += t * head.val
+            t *= 10
+            head = head.next
+        return s1 == s2

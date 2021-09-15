@@ -1,6 +1,7 @@
 # https://leetcode-cn.com/problems/sqrtx/
 # 69. x 的平方根
 
+
 class Solution:
     """二分"""
 

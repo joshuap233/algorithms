@@ -13,5 +13,23 @@ class Solution:
         return f
 
 
+class Solution1:
+    """
+        字符串排序之后比较头尾部
+        (排序之后,公共前缀最大最小的必然在头尾)
+    """
+
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if not strs:
+            return ""
+
+        s1 = min(strs)
+        s2 = max(strs)
+        for i, x in enumerate(s1):
+            if x != s2[i]:
+                return s2[:i]
+        return s1
+
+
 s = Solution()
 s.longestCommonPrefix(["flower", "flow", "flight"])

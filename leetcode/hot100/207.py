@@ -2,47 +2,10 @@
 # 207. 课程表
 
 from typing import List
+from collections import deque
 
 
 class Solution:
-    """
-        判断是否有环就行...访问某个元素后标记下..
-
-        在选修某些课程之前需要一些先修课程,也就是说,
-        有这种阴间数据:
-            [[1,0],[1,2],[0,1]]
-        也就是,这是个图....
-
-        时间超限......
-    """
-
-    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        from collections import defaultdict
-        d = defaultdict(list)
-
-        for i in prerequisites:
-            d[i[0]].append(i[1])
-
-        def dfs(course: int) -> bool:
-            if course not in d:
-                return True
-            if d[course][-1] is None:
-                return False
-
-            for j in d[course]:
-                d[course].append(None)
-                if not dfs(j):
-                    return False
-                d[course].pop(-1)
-            return True
-
-        for i in prerequisites:
-            if not dfs(i[0]):
-                return False
-        return True
-
-
-class Solution1:
     """
         prerequisites 中的元素相当于: [cur,prev]
         拓扑排序
@@ -63,7 +26,6 @@ class Solution1:
     """
 
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        from collections import deque
 
         degrees = [0] * numCourses
         aj = [[] for _ in range(numCourses)]
@@ -81,7 +43,3 @@ class Solution1:
                 if degrees[cur] == 0:
                     queue.append(cur)
         return numCourses == 0
-
-
-s = Solution()
-s.canFinish(3, [[1, 0], [1, 2], [0, 1]])

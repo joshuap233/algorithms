@@ -1,6 +1,6 @@
 # https://leetcode-cn.com/problems/multiply-strings/
 # 43. 字符串相乘
-
+from functools import reduce
 
 class Solution:
     def multiply(self, num1: str, num2: str) -> str:
@@ -9,21 +9,17 @@ class Solution:
 
 class Solution1:
     def multiply(self, num1: str, num2: str) -> str:
-        if num1 == '0' or num2 == '0':
-            return '0'
-
-        lists = [0] * (len(num1) + len(num2))
-        base = 0
+        l1, l2 = len(num1), len(num2)
+        a = [0] * (l1 + l2)
         for i, vi in enumerate(reversed(num1)):
-            overflow = 0
-            j = 0
-            for j, v in enumerate(reversed(num2)):
-                lists[j + base] += int(v) * int(vi) + overflow
-                overflow = lists[j + base] // 10
-                lists[j + base] %= 10
-            lists[j + base + 1] += overflow
-            base += 1
-        return ''.join([str(i) for i in reversed(lists)]).lstrip('0')
+            cur = 0
+            for j, vj in enumerate(reversed(num2)):
+                cur = int(vi) * int(vj) + a[i + j] + cur
+                a[i + j] = cur % 10
+                cur //= 10
+            a[i + l2] += cur
+        return reduce(lambda x, y: str(y) + x, a, '').lstrip('0') or '0'
+
 
 
 s = Solution1()

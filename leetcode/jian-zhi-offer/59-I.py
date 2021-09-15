@@ -69,53 +69,13 @@ class Solution1:
 
 
 class Solution2:
-    """另一种解题方法: 参考:
+    """
+        另一种解题方法: 参考:
          59-II
         可以设置一个辅助队列
     """
 
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
-        if k == 0:
-            return []
-
-        res = []
-        queue = deque()
-        left, right = 0, 0
-
-        def pop():
-            nonlocal left
-            if queue[0] == nums[left]:
-                queue.popleft()
-            left += 1
-
-        def put():
-            nonlocal right
-            value = nums[right]
-            while queue and queue[-1] < value:
-                queue.pop()
-            queue.append(value)
-            right += 1
-
-        for i in range(k):
-            put()
-
-        res.append(queue[0])
-        for i in range(k, len(nums)):
-            put()
-            pop()
-            res.append(queue[0])
-        return res
-
-
-class Solution3:
-    """
-    优化上面的代码
-    """
-
-    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
-        if k == 0:
-            return []
-
         res = []
         queue = deque()
 

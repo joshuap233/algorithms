@@ -12,23 +12,21 @@ class Solution:
 
 
 # 首尾双指针
-class Solution2:
+class Solution1:
     def exchange(self, nums: List[int]) -> List[int]:
-        p1, p2 = 0, len(nums) - 1
-        while p1 < p2:
-            if nums[p1] % 2 == 0:
-                while p1 < p2:
-                    if nums[p2] % 2 != 1:
-                        p2 -= 1
-                    else:
-                        nums[p1], nums[p2] = nums[p2], nums[p1]
-                        break
-            p1 += 1
+        ll, rr = 0, len(nums) - 1
+        while ll < rr:
+            while ll < rr and nums[ll] % 2 == 1:
+                ll += 1
+            while ll < rr and nums[rr] % 2 == 0:
+                rr -= 1
+            if ll < rr:
+                nums[ll], nums[rr] = nums[rr], nums[ll]
         return nums
 
 
-class Solution3:
-    """更简洁..."""
+
+class Solution2:
     def exchange(self, nums: List[int]) -> List[int]:
         left, right = 0, len(nums) - 1
         while left < right:

@@ -8,24 +8,22 @@ from typing import Optional
 class Solution:
     def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
         if not head:
-            return None
+            return
 
-        h1 = h2 = h3 = head
-        cnt = 0
-        while h3:
-            h3 = h3.next
-            cnt += 1
+        le = 0
+        h = head
+        while h:
+            le += 1
+            h = h.next
+        k %= le
+        p1 = p2 = head
+        for _ in range(k):
+            p1 = p1.next
 
-        k = k % cnt
-        while k > 0:
-            h1 = h1.next
-            k -= 1
-
-        while h1.next:
-            h1 = h1.next
-            h2 = h2.next
-
-        h1.next = head
-        head = h2.next
-        h2.next = None
-        return head
+        while p1.next:
+            p1 = p1.next
+            p2 = p2.next
+        p1.next = head
+        ret = p2.next
+        p2.next = None
+        return ret

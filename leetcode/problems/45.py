@@ -23,5 +23,13 @@ class Solution:
         return cnt
 
 
-s = Solution()
-print(s.jump([2, 3, 1, 1, 4]))
+class Solution1:
+    def jump(self, nums: List[int]) -> int:
+        maxi = end = nums[0]
+        cnt = 0
+        for i in range(1, len(nums)):
+            maxi = max(maxi, i + nums[i])
+            if i == end or i == len(nums) - 1:
+                end = maxi
+                cnt += 1
+        return cnt

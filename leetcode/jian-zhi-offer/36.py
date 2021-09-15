@@ -14,7 +14,7 @@ class Node:
 class Solution:
     def treeToDoublyList(self, root: 'Node') -> 'Node':
         if not root:
-            return None
+            return root
         nodes = []
 
         def recur(node: Node):
@@ -36,27 +36,22 @@ class Solution:
 # 而 prev 为上个中序遍历的节点
 class Solution1:
     def treeToDoublyList(self, root: 'Node') -> 'Node':
-        if not root:
-            return None
-        prev, head = None, None
-
         def recur(node: Node):
-            nonlocal prev, head
+            nonlocal prev
             if not node:
                 return
-
-            recur(node.left)
-            if prev:
-                prev.right = node
-                node.left = prev
-            else:
-                head = node
+            ll, rr = node.left, node.right
+            recur(ll)
+            prev.right = node
+            node.left = prev
             prev = node
+            recur(rr)
 
-            recur(node.right)
-
+        if not root:
+            return root
+        prev = dummy = Node(0)
         recur(root)
+        head = dummy.right
         head.left = prev
         prev.right = head
-
         return head

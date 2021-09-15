@@ -12,19 +12,14 @@ class TreeNode:
 
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
-        def build(pre, ino) -> Optional[TreeNode]:
+        def build(pre: List[int], ino: List[int]):
             if not pre:
                 return None
-
-            rv = pre[0]
-            root = TreeNode(rv)
-            if len(pre) == 1:
-                return root
-
-            i = ino.index(rv)
-            root.left = build(pre[1:1 + i], ino[:i])
-            root.right = build(pre[1 + i:], ino[i + 1:])
-            return root
+            node = TreeNode(pre[0])
+            idx = ino.index(pre[0])
+            node.left = build(pre[1:idx + 1], ino[:idx])
+            node.right = build(pre[idx + 1:], ino[idx + 1:])
+            return node
 
         return build(preorder, inorder)
 

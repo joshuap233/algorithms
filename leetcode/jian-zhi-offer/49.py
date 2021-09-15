@@ -1,22 +1,22 @@
 # https://leetcode-cn.com/problems/chou-shu-lcof/
 # 剑指 Offer 49. 丑数
+from heapq import heapify, heappop, heappush
 
 
 # 使用堆存储, 然后一次 pop, 使用 set 防止重复元素被添加
 class Solution:
     def nthUglyNumber(self, n: int) -> int:
-        from heapq import heapify, heappop, heappush
         heap = [1, 2, 3, 5]
-        s = set(heap)
         heapify(heap)
+        s = {1, 2, 3, 5}
         for i in range(n - 1):
-            v = heappop(heap)
+            e = heappop(heap)
             for j in [2, 3, 5]:
-                _next = j * v
-                if _next not in s:
-                    heappush(heap, _next)
-                    s.add(_next)
-        return heappop(heap)
+                v = e * j
+                if v not in s:
+                    s.add(v)
+                    heappush(heap, v)
+        return heap[0]
 
 
 # 上面方法的优化,避免出现重复的方法:

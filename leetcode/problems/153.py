@@ -4,6 +4,9 @@ from typing import List
 
 
 class Solution:
+    """
+        二分题真是一题比一题阴间
+    """
     def findMin(self, nums: List[int]) -> int:
         left, right = 0, len(nums) - 1
         while left < right:

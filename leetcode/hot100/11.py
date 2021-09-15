@@ -14,16 +14,19 @@ class Solution:
             高较小的那个指针移动,
     """
     def maxArea(self, height: List[int]) -> int:
-        left, right = 0, len(height) - 1
-        _max = 0
-
-        while left < right:
-            _max = max(_max, (right - left) * min(height[left], height[right]))
-            if height[left] < height[right]:
-                left += 1
+        ll, rr = 0, len(height) - 1
+        maxi = 0
+        while ll < rr:
+            maxi = max(maxi, min(height[rr], height[ll]) * (rr - ll))
+            if height[ll] < height[rr]:
+                p = height[ll]
+                while ll < rr and height[ll] <= p:
+                    ll += 1
             else:
-                right -= 1
-        return _max
+                p = height[rr]
+                while ll < rr and height[rr] <= p:
+                    rr -= 1
+        return maxi
 
 
 s = Solution()

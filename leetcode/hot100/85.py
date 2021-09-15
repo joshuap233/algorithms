@@ -5,23 +5,25 @@ from typing import List
 
 
 class Solution:
-    # 做法与 221 题一模一样...
-    # leetcode/hot100/221.py
+    """
+        做法与 221 题一模一样...
+        leetcode/hot100/221.py
+    """
     def maximalRectangle(self, matrix: List[List[str]]) -> int:
-        nums = [int(''.join(i), base=2) for i in matrix]
+        def get_width(k: int) -> int:
+            cnt = 0
+            while k:
+                k &= k << 1
+                cnt += 1
+            return cnt
 
-        def getWidth(num: int) -> int:
-            w = 0
-            while num:
-                num &= num << 1
-                w += 1
-            return w
+        maps = [int(''.join(i), base=2) for i in matrix]
+        le = len(maps)
 
         maxi = 0
-        for i, v in enumerate(nums):
-            for j in range(i, len(nums)):
-                v &= nums[j]
-                w = getWidth(v)
-                maxi = max(maxi, w * (j - i + 1))
-
+        for i, v in enumerate(maps):
+            for j in range(i, le):
+                v &= maps[j]
+                maxi = max(maxi, (j - i + 1) * get_width(v))
         return maxi
+

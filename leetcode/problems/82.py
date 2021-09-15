@@ -29,15 +29,14 @@ class Solution1:
     """升序排列的链表"""
 
     def deleteDuplicates(self, head: ListNode) -> ListNode:
-        tail = dummy = ListNode(101, None)
+        prev = tail = dummy = ListNode(301)
         while head:
-            if (not head.next) or head.next.val != head.val:
-                tail.next = head
-                tail = head
+            while head.next and head.next.val == head.val:
+                prev = head
                 head = head.next
-            else:
-                rep = head.val
-                while head and head.val == rep:
-                    head = head.next
+            if prev.val != head.val:
+                tail.next = head
+                tail = tail.next
+            head = head.next
         tail.next = None
         return dummy.next
