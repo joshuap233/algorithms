@@ -218,64 +218,66 @@ class RBTree:
         self.balance_insert(new)
 
     def balance_insert(self, node: Node):
-        item = node.val  # 用来简化算法
         while node != self.root and node.parent.red:
             p = node.parent
             gp = p.parent
             if not (gp.left.red and gp.right.red):
-                gp.red = True
-                if p.val < gp.val:
-                    p.red = False
+                if p == p.parent.left:
+                    # 左右双旋转
+                    if node == p.right:
+                        node = node.parent
+                        self.rightRotation(node)  # 双旋转
+                    node.parent.red = False
+                    node.parent.parent.red = True
+                    self.leftRotation(node.parent.parent)
                 else:
-                    node.red = False
-
-                if p.val < item < gp.val or gp.val < item < p.val:
-                    self.rotate(gp, item)  # 双旋转
-                self.rotate(gp.parent, item)
-                # 旋转过后,新根必然为黑色
+                    # 右左双旋转
+                    if node == p.left:
+                        node = node.parent
+                        self.leftRotation(node)
+                    node.parent.red = False
+                    node.parent.parent.red = True
+                    self.rightRotation(node.parent.parent)
                 break
             gp.left.red = gp.right.red = False
             gp.red = True
             node = node.parent.parent
         self.root.red = False
 
-    def rotate(self, parent: Node, item: int):
-        if not parent:
-            self.root = self.leftRotation(self.root) \
-                if item < self.root.val else self.rightRotation(self.root)
-            return
-
-        if item < parent.val:
-            parent.left = self.leftRotation(parent.left) \
-                if item < parent.left.val else self.rightRotation(parent.left)
-            parent.left.parent = parent
-            return
-
-        parent.right = self.leftRotation(parent.right) \
-            if item < parent.right.val else self.rightRotation(parent.right)
-        parent.right.parent = parent
-
-    @staticmethod
-    def leftRotation(node: Node) -> Node:
+    def leftRotation(self, node: Node):
         root = node.left
         right = root.right
 
         root.right = node
+        root.parent = node.parent
+
+        if node == self.root:
+            self.root = root
+        elif node == node.parent.right:
+            node.parent.right = root
+        else:
+            node.parent.left = root
         node.parent = root
-
         node.left = right
-        return root
+        right.parent = node
 
-    @staticmethod
-    def rightRotation(node: Node) -> Node:
+    def rightRotation(self, node: Node):
         root = node.right
         left = root.left
 
         root.left = node
-        node.parent = root
+        root.parent = node.parent
 
+        if node == self.root:
+            self.root = root
+        elif node == node.parent.right:
+            node.parent.right = root
+        else:
+            node.parent.left = root
+
+        node.parent = root
         node.right = left
-        return root
+        left.parent = node
 
     def balance_delete(self):
         pass
@@ -310,7 +312,7 @@ class RBTree:
             return left + (0 if node.red else 1)
 
         v = True
-        Valid(self.root.right)
+        Valid(self.root)
         return v
 
     def __bool__(self) -> bool:
@@ -355,17 +357,10 @@ class RBTree:
 if __name__ == '__main__':
     import random
 
-    tree = RBTree()
-    for i in [34, 8, 13, 23, 30, 19, 0, 22]:
-        tree.insert(i)
-        tree.print()
-        assert tree.valid()
-
-
     def test():
         # 测试插入删除,直接调用即可
-        tree = RBTree()
-        for _ in range(10000):
+        for i in range(10000):
+            tree = RBTree()
             s = set()
             debug1, debug2 = [], []
 
@@ -382,4 +377,10 @@ if __name__ == '__main__':
                     print('debug1: ', debug1)
                     assert False
         print("PASS")
-    # test()
+
+    # tree = RBTree()
+    # for i in [36, 22, 40, 24, 1, 21, 13, 0, 3, 16, 25, 19, 10, 31]:
+    #     tree.insert(i)
+    #     tree.print()
+    #     assert tree.valid()
+    test()
