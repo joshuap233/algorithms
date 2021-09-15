@@ -378,9 +378,9 @@ if __name__ == '__main__':
                     assert False
         print("PASS")
 
-    # tree = RBTree()
-    # for i in [36, 22, 40, 24, 1, 21, 13, 0, 3, 16, 25, 19, 10, 31]:
-    #     tree.insert(i)
-    #     tree.print()
-    #     assert tree.valid()
-    test()
+    tree = RBTree()
+    for i in [36, 22, 40, 24, 1, 21, 13, 0, 3, 16, 25, 19, 10, 31]:
+        tree.insert(i)
+        tree.print()
+        assert tree.valid()
+    # test()

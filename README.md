@@ -7,6 +7,8 @@
 
 ![pic](./pic/p.png)
 
+![pic](./pic/rb.png)
+
 ## 算法:
 
 1. 快排
