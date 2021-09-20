@@ -158,6 +158,107 @@ R2    R1            R1
 参考:
 https://github.com/skywind3000/avlmini/blob/master/test/linux_rbtree.c
 https://github.com/torvalds/linux/blob/5bfc75d92efd494db37f5c4c173d3639d4772966/tools/include/linux/rbtree.h
+
+
+
+1. 删除的节点有两个儿子, 那么转化为删除只有一个儿子的情况(找到左
+子树最大值或右子树最小值代替当前节点), 实际删除的节点必然最多只有一个儿子,
+因为当需要删除的节点有两个儿子时,会查找左子树最大值或右子树最小值代替
+需要删除的节点, 找到的节点最多只有一个儿子, 如果两个儿子都不存在, 
+那么将任意一个空节点当成儿子即可
+
+
+2. 删除的节点只有一个儿子(如果左右都是空指针, 那么选择任意一个空作为儿子即可)
+2.1 被删除的节点为红, 直接删除, 子节点代替当前节点
+2.2 被删除的节点为黑, 子节点为红,直接删除, 子节点代替当前节点,涂黑
+2.3 被删除的节点 A 为黑, 子节点为黑,这种情况下 A 必然为叶子, 左右儿子都指向
+NULL(黑色), 因为 A 最多只有一个儿子, 如果他的这个儿子为黑,那么左右儿子的黑色节点
+数不等,违反红黑树规则
+
+设 n 是替代删除节点的节点,原节点已经被删除, s 为 n 的兄弟节点
+
+2.3.1 n 为新根, 结束
+两种情况, 一种只剩 n ,一种在上滤过程中,需要平衡的节点达到根,比如 2.3.3
+  
+  
+2.3.2  s 为红色
+     p(黑)
+n(黑)      s(红)
+         sl    sr
+        
+-> 对 p 进行右旋转, p, s 交换颜色
+
+        s(黑)
+    p(红)      sr
+ n(黑)  sl
+ 
+然后按照  2.3.4 处理
+ 
+2.3.3 p,s,sl,sr 都为黑
+     p(黑)
+n(黑)     s(黑)
+        sl   sr
+        
+-> 将 s 重绘为红色
+     p(黑)
+n(黑)     s(红)
+        sl    sr
+
+通过 S 的所有路径，都少了一个黑色节点。
+因为删除 N 的初始的父亲使通过 N 的所有路径少了一个黑色节点,所以 p 节点
+以及 p 的子节点都达到了平衡, 但是, 通过 p 与 不通过 p 节点的路径相差
+一个黑色节点, 所以需要对 p 进行重新平衡.从情形 2.3.1 开始向下考虑
+
+
+2.3.4 s 和 s 的儿子都是黑色,但 P 是红色
+         p(红)
+    N(黑)     s(黑)
+            sl    sr
+    
+-> 交换 p, s 的颜色
+
+     p(黑)
+N(黑)     s(红)
+        sl    sr
+    
+结束, 通过 p 与不通过 p 的黑色节点数相同
+
+
+2.3.5  s 为黑, s 左儿子或右儿子为红
+左儿子为红(双旋转):
+
+         s(黑)
+    sl(红)   sr(黑)
+
+-> 对 s 左旋转, sl, s 交换颜色
+
+        sl(黑)
+             s(红)
+                 sr(黑)
+                 
+进入右儿子为红的状态:      
+
+      p(?)
+n(黑)     s(黑)
+            sr(红)
+
+-> 对 p 做右旋转, sr 涂黑, p,s 交换颜色
+    
+      s(?)
+  p(黑)   sr(黑)
+n(黑)     
+
+
+
+总的来说分为以下几种:
+1. n 为根  (结束)
+2. p 为红  (结束)
+3. s 的儿子为红(单旋转或双旋转, 结束)
+
+4. 所有节点为黑 s 涂红, 变成 s 为红的情况, 此时 p 的左边路径和右边路径
+都缺少了一个黑色节点, 因此需要回溯到父亲节点,继续修复
+
+5. s 为红   (旋转成 p 为红的情况)
 """
 
 
@@ -187,7 +288,7 @@ class RBTree:
         self.NULL.left = self.NULL
         self.NULL.right = self.NULL
 
-        # 哑节点, 添加哑节点好像没什么用,而且打印函数还需要修改
+        # root 使用哑节点好像没什么用,而且打印函数还需要修改
         self.root: Optional[Node] = None
 
     def insert(self, val: int):
@@ -215,9 +316,9 @@ class RBTree:
         if not parent.red:
             return
 
-        self.balance_insert(new)
+        self.balanceInsert(new)
 
-    def balance_insert(self, node: Node):
+    def balanceInsert(self, node: Node):
         while node != self.root and node.parent.red:
             p = node.parent
             gp = p.parent
@@ -242,9 +343,10 @@ class RBTree:
             gp.left.red = gp.right.red = False
             gp.red = True
             node = node.parent.parent
+        # 新根为黑
         self.root.red = False
 
-    def leftRotation(self, node: Node):
+    def leftRotation(self, node: Node) -> Node:
         root = node.left
         right = root.right
 
@@ -260,8 +362,9 @@ class RBTree:
         node.parent = root
         node.left = right
         right.parent = node
+        return root
 
-    def rightRotation(self, node: Node):
+    def rightRotation(self, node: Node) -> Node:
         root = node.right
         left = root.left
 
@@ -278,12 +381,110 @@ class RBTree:
         node.parent = root
         node.right = left
         left.parent = node
+        return root
 
-    def balance_delete(self):
-        pass
+    def balanceDelete(self, node: Node):
+        # node 为代替删除节点位置的节点
+        while node != self.root and not node.red:
+            p = node.parent
+            s = p.right if node == p.left else p.left
 
-    def delete(self, val: int):
-        pass
+            # p, s ,sl,sr 为黑色
+            if not (p.red or s.red or s.left.red or s.right.red):
+                s.red = True
+                node = node.parent
+                continue
+
+            # p 为红色
+            if p.red and not (s.left.red or s.right.red):
+                node = p
+                s.red = True
+                break
+
+            if node == p.left:
+                if s.red:
+                    p.red, s.red = True, False
+                    self.rightRotation(p)
+                    s = p.right
+
+                if s.left.red or s.right.red:
+                    # s 右儿子为黑
+                    if not s.right.red:
+                        s.red, s.left.red = True, False
+                        self.leftRotation(s)
+                        s = p.right
+                    # 左右儿子都为红或左儿子为黑
+                    s.right.red = False
+                    p.red, s.red = s.red, p.red
+                    self.rightRotation(p)
+                    break
+            else:
+                if s.red:
+                    p.red, s.red = True, False
+                    self.leftRotation(p)
+                    s = p.left
+
+                if s.left.red or s.right.red:
+                    if not s.left.red:
+                        s.red, s.right.red = True, False
+                        self.rightRotation(s)
+                        s = p.left
+                    s.left.red = False
+                    p.red, s.red = s.red, p.red
+                    self.leftRotation(p)
+                    break
+        node.red = False
+
+    def delete(self, val: int) -> bool:
+        d = self.root
+        while d != self.NULL and d.val != val:
+            if d.val < val:
+                d = d.right
+            else:
+                d = d.left
+        if d == self.NULL:
+            return False
+
+        if d.left == self.NULL:
+            x = d.right
+            self._delete(d, d.right)
+        elif d.right == self.NULL:
+            x = d.left
+            self._delete(d, d.left)
+        else:
+            tmp = d
+            d = self.mini(d.right)
+            x = d.right
+            self.copyNode(d, tmp)
+            self._delete(d, x)
+
+        # 删除红色节点不需要重新平衡
+        # d 为实际删除的节点, x 为代替 d 位置的节点(可能为 NULL)
+        if not d.red:
+            if x.red:
+                x.red = False
+                return True
+            self.balanceDelete(x)
+        return True
+
+    @staticmethod
+    def copyNode(src: Node, dest: Node):
+        dest.val = src.val
+
+    def mini(self, node: Node):
+        while node.left != self.NULL:
+            node = node.left
+        return node
+
+    def _delete(self, parent: Node, son: Node):
+        # parent 为需要删除的节点, son 为代替 parent 的儿子节点
+        if parent.parent is None:
+            self.root = son
+        elif parent == parent.parent.left:
+            parent.parent.left = son
+        else:
+            parent.parent.right = son
+        son.parent = parent.parent
 
     def find(self, val: int) -> Optional[Node]:
         root = self.root
@@ -296,7 +497,7 @@ class RBTree:
 
     def valid(self) -> bool:
         def Valid(node: Node) -> int:
-            nonlocal v
+            nonlocal v, prev
             if node == self.NULL or not v:
                 return 0
 
@@ -305,12 +506,17 @@ class RBTree:
                 return 0
 
             left = Valid(node.left)
+            if node.val < prev:
+                v = False
+                return 0
+            prev = node.val
             right = Valid(node.right)
             if left != right:
                 v = False
                 return 0
             return left + (0 if node.red else 1)
 
+        prev = float('-inf')
         v = True
         Valid(self.root)
         return v
@@ -357,6 +563,7 @@ class RBTree:
 if __name__ == '__main__':
     import random
 
+
     def test():
         # 测试插入删除,直接调用即可
         for i in range(10000):
@@ -376,11 +583,36 @@ if __name__ == '__main__':
                 if not tree.valid():
                     print('debug1: ', debug1)
                     assert False
+
+            # 随机删除
+            s = list(s)
+            for _ in range(20):
+                v = random.choice(s)
+                s.remove(v)
+                debug2.append(v)
+                if not (tree.delete(v) and tree.valid()):
+                    print('debug1: ', debug1)
+                    print('debug2: ', debug2)
+                    assert False
+
         print("PASS")
 
-    tree = RBTree()
-    for i in [36, 22, 40, 24, 1, 21, 13, 0, 3, 16, 25, 19, 10, 31]:
-        tree.insert(i)
+
+    def debug():
+        tree = RBTree()
+        for i in [27, 22, 3, 32, 26, 31, 20, 28, 36, 8, 13, 11, 24, 15, 33, 37, 6, 17, 7, 16]:
+            tree.insert(i)
+            assert tree.valid()
+
         tree.print()
-        assert tree.valid()
+        for i in [33, 32, 28, 20]:
+            if i == 20:
+                print(1)
+            assert tree.delete(i)
+            tree.print()
+            print(i)
+            assert tree.valid()
+
+
     # test()
+    debug()

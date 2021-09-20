@@ -124,8 +124,8 @@ class AVLTree:
             else:
                 node.left = Insert(node.left)
 
-            node = self.balance_insert(node, val)
-            self.update_height(node)
+            node = self.balanceInsert(node, val)
+            self.updateHeight(node)
             return node
 
         self.root = Insert(self.root)
@@ -150,8 +150,8 @@ class AVLTree:
                 node.val = findMin(node.right)
                 node.right = Delete(node.right, node.val)
 
-            node = self.balance_delete(node)
-            self.update_height(node)
+            node = self.balanceDelete(node)
+            self.updateHeight(node)
             return node
 
         self.root = Delete(self.root, val)
@@ -190,7 +190,7 @@ class AVLTree:
 
         return Valid(self.root)
 
-    def balance_delete(self, node: Node) -> Node:
+    def balanceDelete(self, node: Node) -> Node:
         ll = self.height(node.left)
         rr = self.height(node.right)
 
@@ -206,7 +206,7 @@ class AVLTree:
             return self.doubleRightRotation(node)
         return node
 
-    def balance_insert(self, node: Node, val: int) -> Node:
+    def balanceInsert(self, node: Node, val: int) -> Node:
         ll = self.height(node.left)
         rr = self.height(node.right)
 
@@ -227,8 +227,8 @@ class AVLTree:
         root.right = node
         node.left = right
 
-        self.update_height(node)
-        self.update_height(root)
+        self.updateHeight(node)
+        self.updateHeight(root)
         return root
 
     def rightRotation(self, node: Node) -> Node:
@@ -238,8 +238,8 @@ class AVLTree:
         root.left = node
         node.right = left
 
-        self.update_height(node)
-        self.update_height(root)
+        self.updateHeight(node)
+        self.updateHeight(root)
         return root
 
     def doubleLeftRotation(self, node: Node) -> Node:
@@ -252,7 +252,7 @@ class AVLTree:
         node.right = self.leftRotation(node.right)
         return self.rightRotation(node)
 
-    def update_height(self, node: Node):
+    def updateHeight(self, node: Node):
         if node:
             node.height = max(
                 self.height(node.left),
@@ -267,17 +267,18 @@ if __name__ == '__main__':
     from plot import print_tree
     import random
 
-    tree = AVLTree()
 
-    for i in [1, 3, 4, 5, 6, 7, 8, 2]:
-        tree.insert(i)
-        print_tree(tree.root)
-        assert tree.valid()
+    def debug():
+        tree = AVLTree()
+        for i in [1, 3, 4, 5, 6, 7, 8, 2]:
+            tree.insert(i)
+            print_tree(tree.root)
+            assert tree.valid()
 
-    for j in [1, 4, 6]:
-        tree.delete(j)
-        print_tree(tree.root)
-        assert tree.valid()
+        for j in [1, 4, 6]:
+            tree.delete(j)
+            print_tree(tree.root)
+            assert tree.valid()
 
 
     def test():
@@ -312,3 +313,5 @@ if __name__ == '__main__':
                     print('debug1: ', debug1)
                     print('debug2: ', debug2)
                     assert False
+    # test()
+    debug()
