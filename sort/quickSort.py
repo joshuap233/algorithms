@@ -1,4 +1,6 @@
 from typing import List
+from test import random_lists
+import unittest
 
 """
     1. 挑选基准值：从数列中挑出一个元素，称为“基准”（pivot），
@@ -78,3 +80,16 @@ def three_way_partition(nums: List[int], left: int, right: int) -> int:
             left += 1
         i += 1
 
+
+class TestQuickSort(unittest.TestCase):
+    def test_equal(self):
+        for i in range(1000):
+            lists = random_lists()
+            cpy = lists[:]
+            lists = quickSort(lists)
+            cpy.sort()
+            self.assertEqual(lists, cpy)
+
+
+if __name__ == '__main__':
+    unittest.main()

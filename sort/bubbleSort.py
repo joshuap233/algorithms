@@ -1,4 +1,6 @@
 from typing import List
+from test import random_lists
+import unittest
 
 
 def bubbleSort(nums: List[int]) -> List[int]:
@@ -13,3 +15,17 @@ def bubbleSort(nums: List[int]) -> List[int]:
             if nums[j] > nums[j + 1]:
                 nums[j], nums[j + 1] = nums[j + 1], nums[j]
     return nums
+
+
+class TestBubbleSort(unittest.TestCase):
+    def test_equal(self):
+        for i in range(1000):
+            lists = random_lists()
+            cpy = lists[:]
+            lists = bubbleSort(lists)
+            cpy.sort()
+            self.assertEqual(lists, cpy)
+
+
+if __name__ == '__main__':
+    unittest.main()

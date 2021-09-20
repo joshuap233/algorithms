@@ -1,4 +1,6 @@
 from typing import List
+from test import random_lists
+import unittest
 
 
 def insertionSort(nums: List[int]) -> List[int]:
@@ -21,3 +23,15 @@ def insertionSort(nums: List[int]) -> List[int]:
     return nums
 
 
+class TestInsertionSort(unittest.TestCase):
+    def test_equal(self):
+        for i in range(1000):
+            lists = random_lists()
+            cpy = lists[:]
+            lists = insertionSort(lists)
+            cpy.sort()
+            self.assertEqual(lists, cpy)
+
+
+if __name__ == '__main__':
+    unittest.main()
