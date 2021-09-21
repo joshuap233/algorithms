@@ -10,6 +10,63 @@ class TreeNode:
         self.right = None
 
 
+class Solution0:
+    """
+    看到一个容易理解与记忆的迭代版本：
+    https://leetcode-cn.com/problems/binary-tree-inorder-traversal/solution/yan-se-biao-ji-fa-yi-chong-tong-yong-qie-jian-ming/
+    先序中序后续只需要修改 i.val 的位置即可
+    """
+
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        """中序"""
+        stack = [root]
+        ret = []
+        while stack:
+            i = stack.pop(-1)
+            if isinstance(i, TreeNode):
+                stack.extend([i.right, i.val, i.left])
+            elif isinstance(i, int):
+                ret.append(i)
+        return ret
+
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        """先序"""
+        stack = [root]
+        ret = []
+        while stack:
+            i = stack.pop(-1)
+            if isinstance(i, TreeNode):
+                stack.extend([i.right, i.left, i.val])
+            elif isinstance(i, int):
+                ret.append(i)
+        return ret
+
+    def postorderTraversal(self, root: TreeNode) -> List[int]:
+        """后序遍历"""
+        stack = [root]
+        ret = []
+        while stack:
+            i = stack.pop(-1)
+            if isinstance(i, TreeNode):
+                stack.extend([i.val, i.right, i.left])
+            elif isinstance(i, int):
+                ret.append(i)
+        return ret
+
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        if not root:
+            return []
+        q = deque([root])
+        ret = []
+        while q:
+            for i in range(len(q)):
+                e = q.popleft()
+                ret.append(e.val)
+                e.left and q.append(e.left)
+                e.right and q.append(e.right)
+        return ret
+
+
 class Solution:
     # 前序遍历
     def preorderTraversal(self, root: TreeNode) -> List[int]:
