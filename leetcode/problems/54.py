@@ -21,6 +21,9 @@ class Solution:
 
 
 class Solution1:
+    """
+        通用解法
+    """
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
         maxX, maxY = len(matrix[0]), len(matrix)
         left, right = 0, maxX - 1

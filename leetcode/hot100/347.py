@@ -41,4 +41,4 @@ class Solution1:
                 heappush(heap, (i, v))
             elif heap[0][0] < i:
                 heapreplace(heap, (i, v))
-        return [i[1] for i in heap]
+        return heap

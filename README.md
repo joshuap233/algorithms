@@ -18,6 +18,7 @@
 5. 归并排序
 6. 快速选择
 7. 拓扑排序
+8. [dijkstra](./leetcode/problems/743.py)
 
 ## 数据结构:
 

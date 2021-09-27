@@ -60,7 +60,7 @@ def quickSort(nums: List[int]):
     return nums
 
 
-def three_way_partition(nums: List[int], left: int, right: int) -> int:
+def three_way_partition(nums: List[int], left: int, right: int):
     """
         三路排序,将等于枢纽的值放到中间,
         可以用来解决荷兰旗问题(leetcode 颜色分类)

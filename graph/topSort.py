@@ -11,20 +11,26 @@
     出队， 删除该顶点(查找 A 的邻接表，将所有 A 通向的顶点的入度减一)，
     A 顶点删除后，某个因此而入度为 0， 将该顶点加入队列
 
-    应用: leetcode/hot100/207.py 课程表
+    应用:
+    leetcode/hot100/207.py 课程表
+    leetcode/problems/210.py 课程表二
 """
 
 
 def main():
     adjacent_list = [[1, 2], [0, 2], [1]]  # 邻接表
     degrees = [1, 2, 2]  # 入度表
+    nums: int = 3        # 顶点数
+    ret = []
 
     q = [i for i, v in enumerate(degrees) if v == 0]
     while q:
+        nums -= 1
         h = q.pop(0)
+        ret.append(h)
         for c in adjacent_list[h]:
             degrees[c] -= 1
             if degrees[c] == 0:
                 q.append(c)
 
-
+    return ret if nums == 0 else []
