@@ -44,16 +44,15 @@ class Solution2:
     """
 
     def numSquares(self, n: int) -> int:
-        from math import isqrt
-        nums = [i * i for i in range(1, isqrt(n) + 1)]
+        i = 1
         dp = [n] * (n + 1)
-
-        # i = j 时会用到 dp[0],也就是需要凑的数恰好等于完全平方数时
         dp[0] = 0
+        while i * i <= n:
+            v = i * i
+            for s in range(v, n + 1):
+                dp[s] = min(dp[s - v] + 1, dp[s])
+            i += 1
 
-        for i in nums:
-            for j in range(i, n + 1):
-                dp[j] = min(dp[j - i] + 1, dp[j])
         return dp[-1]
 
 
